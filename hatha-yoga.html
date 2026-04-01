@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>하타요가 — 고요</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;500;700;900&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1612;
+  --paper: #f5f0e8;
+  --warm: #c9a96e;
+  --sage: #7a8b6f;
+  --rust: #b5654a;
+  --mist: #d4cfc5;
+  --cloud: #ebe6dc;
+  --deep: #2c2520;
+  --gold-glow: rgba(201, 169, 110, 0.15);
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  overflow-x: hidden;
+  line-height: 1.7;
+}
+
+/* ── NAV ── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.2rem 3rem;
+  background: rgba(245, 240, 232, 0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--mist);
+}
+.nav.scrolled { padding: 0.8rem 3rem; box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
+.nav-logo {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 900; font-size: 1.5rem;
+  letter-spacing: -0.02em; color: var(--ink);
+  text-decoration: none;
+}
+.nav-logo span { color: var(--warm); }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  text-decoration: none; color: var(--ink);
+  font-weight: 400; font-size: 0.92rem;
+  position: relative; transition: color 0.3s;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; left: 0;
+  width: 0; height: 2px; background: var(--warm);
+  transition: width 0.3s;
+}
+.nav-links a:hover { color: var(--warm); }
+.nav-links a:hover::after { width: 100%; }
+.nav-cta {
+  padding: 0.55rem 1.6rem; border: 1.5px solid var(--ink);
+  border-radius: 100px; text-decoration: none; color: var(--ink);
+  font-size: 0.88rem; font-weight: 500; transition: all 0.3s;
+}
+.nav-cta:hover { background: var(--ink); color: var(--paper); }
+
+/* ── PAGE HERO ── */
+.page-hero {
+  padding: 10rem 3rem 5rem;
+  background: linear-gradient(160deg, var(--paper) 0%, var(--cloud) 50%, #e8dfd1 100%);
+  position: relative; overflow: hidden;
+}
+.page-hero::before {
+  content: ''; position: absolute; top: -100px; right: -80px;
+  width: 500px; height: 500px; border-radius: 50%;
+  background: var(--warm); opacity: 0.06;
+}
+.breadcrumb {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-size: 0.85rem; color: #999; margin-bottom: 2rem;
+}
+.breadcrumb a { color: var(--warm); text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.page-hero h1 {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 900; font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 1.2; letter-spacing: -0.02em;
+  margin-bottom: 1.2rem;
+}
+.page-hero h1 em {
+  font-style: normal;
+  background: linear-gradient(135deg, var(--warm), var(--rust));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.page-hero-desc {
+  font-size: 1.1rem; color: #6b6157; max-width: 600px;
+  font-weight: 300; line-height: 1.9;
+}
+
+/* ── CONTENT SECTIONS ── */
+section { padding: 5rem 3rem; }
+.container { max-width: 1100px; margin: 0 auto; }
+.section-label {
+  display: inline-block; font-size: 0.78rem;
+  font-weight: 500; letter-spacing: 0.2em;
+  color: var(--warm); margin-bottom: 1rem;
+}
+.section-title {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 700; font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  line-height: 1.3; margin-bottom: 1.2rem;
+}
+
+/* ── INTRO GRID ── */
+.intro-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 4rem; align-items: center;
+}
+.intro-text p {
+  font-size: 1rem; color: #6b6157; line-height: 2;
+  margin-bottom: 1.2rem; font-weight: 300;
+}
+.intro-visual {
+  background: linear-gradient(135deg, var(--cloud), var(--mist));
+  border-radius: 24px; height: 400px;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.intro-visual-icon {
+  font-size: 8rem; opacity: 0.15;
+  font-family: 'Noto Serif KR', serif;
+}
+.intro-visual-label {
+  position: absolute; bottom: 2rem; left: 2rem;
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.2rem; font-weight: 700; color: var(--ink);
+  opacity: 0.4;
+}
+
+/* ── BENEFITS ── */
+.benefits-section { background: var(--deep); color: var(--paper); }
+.benefits-section .section-desc { color: #a89f94; margin-bottom: 3rem; }
+.benefits-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+}
+.benefit-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px; padding: 2.5rem 2rem;
+  transition: all 0.4s;
+}
+.benefit-card:hover {
+  background: rgba(255,255,255,0.08);
+  transform: translateY(-4px);
+}
+.benefit-num {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 2.5rem; font-weight: 900;
+  color: var(--warm); opacity: 0.3;
+  margin-bottom: 1rem; line-height: 1;
+}
+.benefit-card h3 {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.2rem; font-weight: 700;
+  margin-bottom: 0.8rem;
+}
+.benefit-card p {
+  font-size: 0.92rem; color: #a89f94; line-height: 1.8;
+}
+
+/* ── CURRICULUM ── */
+.curriculum-list { max-width: 800px; }
+.curriculum-item {
+  display: flex; gap: 2rem; align-items: flex-start;
+  padding: 2rem 0;
+  border-bottom: 1px solid var(--cloud);
+}
+.curriculum-item:last-child { border-bottom: none; }
+.curriculum-step {
+  flex-shrink: 0; width: 56px; height: 56px;
+  border-radius: 16px; background: var(--gold-glow);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.2rem; font-weight: 700; color: var(--warm);
+}
+.curriculum-content h3 {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.15rem; font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.curriculum-content p {
+  font-size: 0.95rem; color: #7a7168; line-height: 1.8;
+}
+.curriculum-meta {
+  display: flex; gap: 1.5rem; margin-top: 0.6rem;
+  font-size: 0.82rem; color: #aaa;
+}
+
+/* ── POSES ── */
+.poses-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+.pose-card {
+  background: white; border-radius: 16px;
+  padding: 2rem 1.5rem; text-align: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+  transition: all 0.4s;
+}
+.pose-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
+.pose-icon {
+  font-size: 2.8rem; margin-bottom: 1rem;
+  display: block;
+}
+.pose-card h4 {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.05rem; font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+.pose-card .pose-sanskrit {
+  font-size: 0.78rem; color: var(--warm);
+  margin-bottom: 0.6rem;
+}
+.pose-card p {
+  font-size: 0.85rem; color: #999; line-height: 1.6;
+}
+
+/* ── FAQ ── */
+.faq-list { max-width: 750px; }
+.faq-item {
+  border-bottom: 1px solid var(--cloud);
+  padding: 1.5rem 0;
+}
+.faq-question {
+  display: flex; justify-content: space-between; align-items: center;
+  cursor: pointer; font-weight: 500; font-size: 1rem;
+  background: none; border: none; width: 100%;
+  text-align: left; color: var(--ink); font-family: inherit;
+  padding: 0;
+}
+.faq-question::after {
+  content: '+'; font-size: 1.4rem; color: var(--warm);
+  transition: transform 0.3s; flex-shrink: 0; margin-left: 1rem;
+}
+.faq-item.open .faq-question::after { transform: rotate(45deg); }
+.faq-answer {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s;
+}
+.faq-item.open .faq-answer { max-height: 300px; padding-top: 1rem; }
+.faq-answer p {
+  font-size: 0.95rem; color: #7a7168; line-height: 1.9; font-weight: 300;
+}
+
+/* ── CTA BANNER ── */
+.cta-banner {
+  background: linear-gradient(135deg, var(--warm), var(--rust));
+  color: white; text-align: center;
+  padding: 5rem 3rem; border-radius: 24px;
+  max-width: 1100px; margin: 0 auto 5rem;
+  position: relative; overflow: hidden;
+}
+.cta-banner::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.1), transparent 60%);
+}
+.cta-banner h2 {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 2rem; font-weight: 700;
+  margin-bottom: 1rem; position: relative;
+}
+.cta-banner p {
+  font-size: 1rem; opacity: 0.85; margin-bottom: 2rem;
+  position: relative;
+}
+.btn-white {
+  display: inline-block; padding: 0.9rem 2.4rem;
+  background: white; color: var(--ink);
+  border-radius: 100px; font-size: 0.95rem;
+  font-weight: 500; text-decoration: none;
+  transition: all 0.3s; position: relative;
+}
+.btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+
+/* ── FOOTER ── */
+footer {
+  padding: 3rem 3rem 2rem;
+  border-top: 1px solid var(--mist);
+  display: flex; justify-content: space-between; align-items: center;
+  max-width: 1100px; margin: 0 auto;
+}
+.footer-logo {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 900; font-size: 1.2rem;
+  text-decoration: none; color: var(--ink);
+}
+.footer-logo span { color: var(--warm); }
+.footer-copy { font-size: 0.82rem; color: #aaa; }
+
+/* ── SCROLL ANIM ── */
+.reveal {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.8s, transform 0.8s;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .nav-links, .nav-cta { display: none; }
+  .intro-grid { grid-template-columns: 1fr; }
+  .benefits-grid { grid-template-columns: 1fr; }
+  .poses-grid { grid-template-columns: repeat(2, 1fr); }
+  section { padding: 4rem 1.5rem; }
+  .page-hero { padding: 8rem 1.5rem 4rem; }
+  .nav { padding: 1rem 1.5rem; }
+  footer { flex-direction: column; gap: 1rem; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-logo">고요<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">소개</a></li>
+    <li><a href="index.html#programs">프로그램</a></li>
+    <li><a href="index.html#schedule">일정</a></li>
+    <li><a href="index.html#reviews">후기</a></li>
+    <li><a href="index.html#contact">문의</a></li>
+  </ul>
+  <a href="index.html#contact" class="nav-cta">체험 신청</a>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="breadcrumb">
+    <a href="index.html">홈</a>
+    <span>›</span>
+    <a href="index.html#programs">프로그램</a>
+    <span>›</span>
+    <span>하타요가</span>
+  </div>
+  <h1><em>하타요가</em><br>Hatha Yoga</h1>
+  <p class="page-hero-desc">
+    고대 인도에서 시작된 가장 전통적인 요가의 형태.
+    자세(아사나)와 호흡(프라나야마)의 조화를 통해
+    몸과 마음의 깊은 균형을 찾아갑니다.
+  </p>
+</section>
+
+<!-- INTRO -->
+<section>
+  <div class="container">
+    <div class="intro-grid reveal">
+      <div class="intro-text">
+        <div class="section-label">WHAT IS HATHA YOGA</div>
+        <h2 class="section-title">하타요가란<br>무엇인가요?</h2>
+        <p>
+          하타(Hatha)는 산스크리트어로 '하(Ha, 태양)'와 '타(Tha, 달)'의 합성어입니다.
+          상반된 두 에너지를 조화롭게 합일시키는 것이 하타요가의 핵심 철학입니다.
+        </p>
+        <p>
+          다른 요가 스타일에 비해 비교적 느린 속도로 진행되며,
+          각 자세를 충분히 유지하면서 신체 정렬과 호흡에 집중합니다.
+          초보자에게 가장 추천되는 요가 스타일이며,
+          숙련자에게도 깊이 있는 수련의 토대가 됩니다.
+        </p>
+        <p>
+          우리 수업에서는 전통 하타요가의 정수를 유지하면서도
+          현대인의 생활 패턴에 맞게 프로그램을 구성하여
+          실질적인 건강 효과를 경험할 수 있도록 안내합니다.
+        </p>
+      </div>
+      <div class="intro-visual">
+        <div class="intro-visual-icon">靜</div>
+        <div class="intro-visual-label">Balance of Sun & Moon</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="benefits-section">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">BENEFITS</div>
+      <h2 class="section-title" style="color:var(--paper);">하타요가의 효과</h2>
+      <p class="section-desc">꾸준한 수련으로 느낄 수 있는 변화들</p>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-card reveal">
+        <div class="benefit-num">01</div>
+        <h3>유연성 향상</h3>
+        <p>각 아사나를 충분히 유지하며 근육과 관절의 가동 범위를 점진적으로 넓혀갑니다. 4주 이내에 체감할 수 있는 변화가 시작됩니다.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-num">02</div>
+        <h3>자세 교정</h3>
+        <p>정확한 신체 정렬(얼라인먼트)에 집중하여 일상 속 잘못된 자세를 바로잡고, 척추 건강과 코어 안정성을 회복합니다.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-num">03</div>
+        <h3>스트레스 해소</h3>
+        <p>깊은 호흡과 함께하는 천천히 움직임이 부교감신경을 활성화하여 스트레스 호르몬 수치를 효과적으로 낮춰줍니다.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-num">04</div>
+        <h3>근력 강화</h3>
+        <p>자세를 유지하는 과정에서 자연스럽게 체중 부하 운동이 이루어져, 깊은 층의 근육(심부근)이 강화됩니다.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-num">05</div>
+        <h3>호흡 개선</h3>
+        <p>프라나야마(호흡법) 수련을 통해 폐활량이 증가하고 호흡이 깊어지며, 일상에서의 호흡 패턴 자체가 변화합니다.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-num">06</div>
+        <h3>집중력 향상</h3>
+        <p>자세와 호흡에 의식을 집중하는 훈련이 명상적 집중력으로 이어져, 업무와 일상의 효율성이 높아집니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CURRICULUM -->
+<section>
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">CURRICULUM</div>
+      <h2 class="section-title">수업 구성</h2>
+    </div>
+    <div class="curriculum-list">
+      <div class="curriculum-item reveal">
+        <div class="curriculum-step">01</div>
+        <div class="curriculum-content">
+          <h3>센터링 & 호흡</h3>
+          <p>편안한 자세로 앉아 오늘의 몸 상태를 살피고, 복식 호흡과 우짜이 호흡으로 수련을 위한 마음의 준비를 합니다.</p>
+          <div class="curriculum-meta">
+            <span>⏱ 약 10분</span>
+            <span>📍 좌식 / 앙와위</span>
+          </div>
+        </div>
+      </div>
+      <div class="curriculum-item reveal">
+        <div class="curriculum-step">02</div>
+        <div class="curriculum-content">
+          <h3>워밍업 & 태양경배</h3>
+          <p>관절 풀기와 수리야 나마스카라(태양경배 A, B)를 반복하여 전신의 혈액순환을 촉진하고 근육의 온도를 올립니다.</p>
+          <div class="curriculum-meta">
+            <span>⏱ 약 15분</span>
+            <span>📍 전신 동적 스트레칭</span>
+          </div>
+        </div>
+      </div>
+      <div class="curriculum-item reveal">
+        <div class="curriculum-step">03</div>
+        <div class="curriculum-content">
+          <h3>서서 하는 아사나</h3>
+          <p>전사 자세(비라바드라사나), 삼각 자세(트리코나사나) 등 선 자세를 통해 하체 근력과 균형감각을 키웁니다.</p>
+          <div class="curriculum-meta">
+            <span>⏱ 약 15분</span>
+            <span>📍 균형 · 근력 중심</span>
+          </div>
+        </div>
+      </div>
+      <div class="curriculum-item reveal">
+        <div class="curriculum-step">04</div>
+        <div class="curriculum-content">
+          <h3>바닥 아사나 & 마무리</h3>
+          <p>앉거나 누운 자세에서 전굴, 후굴, 트위스트를 수행하고, 샤바아사나(송장 자세)로 완전한 이완을 경험합니다.</p>
+          <div class="curriculum-meta">
+            <span>⏱ 약 20분</span>
+            <span>📍 이완 · 회복 중심</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REPRESENTATIVE POSES -->
+<section style="background: var(--cloud);">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">KEY POSES</div>
+      <h2 class="section-title">대표 아사나</h2>
+    </div>
+    <div class="poses-grid">
+      <div class="pose-card reveal">
+        <span class="pose-icon">🌅</span>
+        <h4>태양경배</h4>
+        <div class="pose-sanskrit">Surya Namaskar</div>
+        <p>12개의 동작을 호흡에 맞춰 연결하는 전신 운동의 기본</p>
+      </div>
+      <div class="pose-card reveal">
+        <span class="pose-icon">⚔️</span>
+        <h4>전사 자세</h4>
+        <div class="pose-sanskrit">Virabhadrasana</div>
+        <p>하체 근력과 집중력을 동시에 키우는 대표적 선 자세</p>
+      </div>
+      <div class="pose-card reveal">
+        <span class="pose-icon">🌳</span>
+        <h4>나무 자세</h4>
+        <div class="pose-sanskrit">Vrksasana</div>
+        <p>한 발로 서서 균형을 잡으며 내면의 안정을 찾는 자세</p>
+      </div>
+      <div class="pose-card reveal">
+        <span class="pose-icon">🐍</span>
+        <h4>코브라 자세</h4>
+        <div class="pose-sanskrit">Bhujangasana</div>
+        <p>척추를 부드럽게 후굴하며 가슴을 열어주는 기초 후굴 자세</p>
+      </div>
+      <div class="pose-card reveal">
+        <span class="pose-icon">🔺</span>
+        <h4>삼각 자세</h4>
+        <div class="pose-sanskrit">Trikonasana</div>
+        <p>측면 스트레칭과 함께 몸 전체의 정렬을 잡아주는 자세</p>
+      </div>
+      <div class="pose-card reveal">
+        <span class="pose-icon">🐕</span>
+        <h4>아래를 보는 개</h4>
+        <div class="pose-sanskrit">Adho Mukha Svanasana</div>
+        <p>전신을 스트레칭하며 혈액순환을 촉진하는 역전 자세</p>
+      </div>
+      <div class="pose-card reveal">
+        <span class="pose-icon">🧒</span>
+        <h4>아이 자세</h4>
+        <div class="pose-sanskrit">Balasana</div>
+        <p>언제든 돌아갈 수 있는 편안한 휴식과 회복의 자세</p>
+      </div>
+      <div class="pose-card reveal">
+        <span class="pose-icon">🌙</span>
+        <h4>송장 자세</h4>
+        <div class="pose-sanskrit">Savasana</div>
+        <p>수련의 마무리, 완전한 이완으로 몸과 마음을 리셋</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">자주 묻는 질문</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <button class="faq-question">몸이 뻣뻣해도 할 수 있나요?</button>
+        <div class="faq-answer">
+          <p>물론입니다. 하타요가는 오히려 유연하지 않은 분들에게 가장 효과적입니다. 각자의 신체 조건에 맞게 보조 도구(블록, 스트랩)를 활용하며, 무리하지 않는 범위에서 자연스럽게 유연성을 키워갑니다.</p>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-question">빈야사 요가와 어떻게 다른가요?</button>
+        <div class="faq-answer">
+          <p>빈야사는 호흡에 맞춰 동작을 흐르듯 연결하는 반면, 하타요가는 각 자세를 개별적으로 충분히 유지합니다. 정확한 자세 정렬과 깊은 호흡에 더 집중할 수 있어 초보자에게 특히 적합합니다.</p>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-question">수업에 필요한 준비물이 있나요?</button>
+        <div class="faq-answer">
+          <p>편한 운동복만 준비하시면 됩니다. 요가 매트, 블록, 스트랩 등의 도구는 수련 공간에 모두 비치되어 있습니다. 개인 매트를 가져오셔도 좋습니다.</p>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-question">얼마나 자주 수련하는 게 좋은가요?</button>
+        <div class="faq-answer">
+          <p>처음에는 주 2~3회를 권장합니다. 몸이 적응되면 주 4~5회까지 늘릴 수 있습니다. 매일 짧은 시간(15~20분)이라도 꾸준히 하는 것이 간헐적으로 긴 수련보다 효과적입니다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div style="padding: 0 3rem;">
+  <div class="cta-banner reveal">
+    <h2>하타요가 첫 수업,<br>무료로 체험하세요</h2>
+    <p>매주 월 · 수 오전 7시, 기초반이 진행됩니다.</p>
+    <a href="index.html#contact" class="btn-white">무료 체험 신청 →</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <a href="index.html" class="footer-logo">고요<span>.</span></a>
+  <div class="footer-copy">© 2026 고요. All rights reserved.</div>
+</footer>
+
+<script>
+// Nav scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+reveals.forEach(el => observer.observe(el));
+
+// FAQ toggle
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  });
+});
+</script>
+
+</body>
+</html>
