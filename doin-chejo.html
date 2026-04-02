@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>도인체조 — 고요</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;500;700;900&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1612;
+  --paper: #f5f0e8;
+  --warm: #c9a96e;
+  --sage: #7a8b6f;
+  --sage-deep: #4a5e3f;
+  --rust: #b5654a;
+  --mist: #d4cfc5;
+  --cloud: #ebe6dc;
+  --deep: #2c2520;
+  --sage-glow: rgba(122, 139, 111, 0.15);
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--paper); color: var(--ink);
+  overflow-x: hidden; line-height: 1.7;
+}
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.2rem 3rem;
+  background: rgba(245, 240, 232, 0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--mist);
+}
+.nav.scrolled { padding: 0.8rem 3rem; box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
+.nav-logo {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 900; font-size: 1.5rem;
+  letter-spacing: -0.02em; color: var(--ink); text-decoration: none;
+}
+.nav-logo span { color: var(--warm); }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  text-decoration: none; color: var(--ink);
+  font-weight: 400; font-size: 0.92rem;
+  position: relative; transition: color 0.3s;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; left: 0;
+  width: 0; height: 2px; background: var(--warm); transition: width 0.3s;
+}
+.nav-links a:hover { color: var(--warm); }
+.nav-links a:hover::after { width: 100%; }
+.nav-cta {
+  padding: 0.55rem 1.6rem; border: 1.5px solid var(--ink);
+  border-radius: 100px; text-decoration: none; color: var(--ink);
+  font-size: 0.88rem; font-weight: 500; transition: all 0.3s;
+}
+.nav-cta:hover { background: var(--ink); color: var(--paper); }
+
+.page-hero {
+  padding: 10rem 3rem 5rem;
+  background: linear-gradient(160deg, var(--paper) 0%, #dfe6d9 50%, var(--cloud) 100%);
+  position: relative; overflow: hidden;
+}
+.page-hero::before {
+  content: ''; position: absolute; top: -80px; right: -60px;
+  width: 480px; height: 480px; border-radius: 50%;
+  background: var(--sage); opacity: 0.07;
+}
+.page-hero::after {
+  content: ''; position: absolute; bottom: -100px; left: -80px;
+  width: 360px; height: 360px; border-radius: 50%;
+  background: var(--sage-deep); opacity: 0.05;
+}
+.breadcrumb {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-size: 0.85rem; color: #999; margin-bottom: 2rem;
+}
+.breadcrumb a { color: var(--sage); text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.page-hero h1 {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 900; font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 1.2rem;
+}
+.page-hero h1 em {
+  font-style: normal;
+  background: linear-gradient(135deg, var(--sage), var(--sage-deep));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.page-hero-desc {
+  font-size: 1.1rem; color: #6b6157; max-width: 600px;
+  font-weight: 300; line-height: 1.9;
+}
+
+section { padding: 5rem 3rem; }
+.container { max-width: 1100px; margin: 0 auto; }
+.section-label {
+  display: inline-block; font-size: 0.78rem;
+  font-weight: 500; letter-spacing: 0.2em;
+  color: var(--sage); margin-bottom: 1rem;
+}
+.section-title {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 700; font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  line-height: 1.3; margin-bottom: 1.2rem;
+}
+
+/* ── INTRO ── */
+.intro-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 4rem; align-items: center;
+}
+.intro-text p {
+  font-size: 1rem; color: #6b6157; line-height: 2;
+  margin-bottom: 1.2rem; font-weight: 300;
+}
+.intro-visual {
+  background: linear-gradient(135deg, #cdd8c5, #92a888);
+  border-radius: 24px; height: 400px;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.intro-visual-icon {
+  font-size: 8rem; opacity: 0.15;
+  font-family: 'Noto Serif KR', serif; color: white;
+}
+.intro-visual-label {
+  position: absolute; bottom: 2rem; left: 2rem;
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.15rem; font-weight: 700; color: white; opacity: 0.5;
+}
+
+/* ── BODY PARTS ── */
+.parts-section { background: var(--deep); color: var(--paper); }
+.parts-section .section-label { color: var(--sage); }
+.parts-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem; margin-top: 3rem;
+}
+.part-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px; padding: 2rem 1.5rem;
+  text-align: center; transition: all 0.4s;
+}
+.part-card:hover { background: rgba(255,255,255,0.08); transform: translateY(-4px); }
+.part-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+.part-card h3 {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem;
+}
+.part-card p { font-size: 0.85rem; color: #a89f94; line-height: 1.7; }
+
+/* ── SEQUENCE ── */
+.sequence-section { background: var(--cloud); }
+.sequence-list { max-width: 850px; }
+.sequence-item {
+  display: grid; grid-template-columns: 80px 1fr; gap: 1.5rem;
+  align-items: start; padding: 2rem 0;
+  border-bottom: 1px solid var(--mist);
+}
+.sequence-item:last-child { border-bottom: none; }
+.seq-num {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: white; border: 2px solid var(--sage);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.1rem; font-weight: 700; color: var(--sage);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+}
+.seq-content h3 {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.15rem; font-weight: 700; margin-bottom: 0.3rem;
+}
+.seq-content .hanja {
+  font-size: 0.82rem; color: var(--sage); margin-bottom: 0.5rem;
+}
+.seq-content p { font-size: 0.95rem; color: #7a7168; line-height: 1.8; }
+.seq-meta {
+  display: flex; gap: 1.5rem; margin-top: 0.6rem;
+  font-size: 0.82rem; color: #aaa;
+}
+
+/* ── BENEFITS ── */
+.benefits-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+  margin-top: 2.5rem;
+}
+.benefit-card {
+  background: white; border-radius: 20px;
+  padding: 2.5rem 2rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.04); transition: all 0.4s;
+}
+.benefit-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
+.benefit-icon {
+  width: 56px; height: 56px; border-radius: 16px;
+  background: var(--sage-glow);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.6rem; margin-bottom: 1.2rem;
+}
+.benefit-card h3 {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.1rem; font-weight: 700; margin-bottom: 0.6rem;
+}
+.benefit-card p { font-size: 0.92rem; color: #7a7168; line-height: 1.8; }
+
+/* ── COMPARISON ── */
+.compare-table {
+  width: 100%; border-collapse: collapse;
+  margin-top: 2rem; max-width: 850px;
+}
+.compare-table th {
+  text-align: left; padding: 1rem 1.5rem;
+  font-weight: 500; font-size: 0.85rem;
+  color: #999; letter-spacing: 0.08em;
+  border-bottom: 2px solid var(--mist);
+}
+.compare-table td {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--cloud); font-size: 0.95rem;
+}
+.compare-table tbody tr:hover { background: var(--cloud); }
+.compare-highlight { background: var(--sage-glow); font-weight: 500; }
+
+/* ── FAQ ── */
+.faq-list { max-width: 750px; }
+.faq-item { border-bottom: 1px solid var(--cloud); padding: 1.5rem 0; }
+.faq-question {
+  display: flex; justify-content: space-between; align-items: center;
+  cursor: pointer; font-weight: 500; font-size: 1rem;
+  background: none; border: none; width: 100%;
+  text-align: left; color: var(--ink); font-family: inherit; padding: 0;
+}
+.faq-question::after {
+  content: '+'; font-size: 1.4rem; color: var(--sage);
+  transition: transform 0.3s; flex-shrink: 0; margin-left: 1rem;
+}
+.faq-item.open .faq-question::after { transform: rotate(45deg); }
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s; }
+.faq-item.open .faq-answer { max-height: 300px; padding-top: 1rem; }
+.faq-answer p { font-size: 0.95rem; color: #7a7168; line-height: 1.9; font-weight: 300; }
+
+/* ── CTA ── */
+.cta-banner {
+  background: linear-gradient(135deg, var(--sage), var(--sage-deep));
+  color: white; text-align: center;
+  padding: 5rem 3rem; border-radius: 24px;
+  max-width: 1100px; margin: 0 auto 5rem;
+  position: relative; overflow: hidden;
+}
+.cta-banner::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(circle at 60% 40%, rgba(255,255,255,0.1), transparent 60%);
+}
+.cta-banner h2 {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 2rem; font-weight: 700; margin-bottom: 1rem; position: relative;
+}
+.cta-banner p { font-size: 1rem; opacity: 0.85; margin-bottom: 2rem; position: relative; }
+.btn-white {
+  display: inline-block; padding: 0.9rem 2.4rem;
+  background: white; color: var(--ink);
+  border-radius: 100px; font-size: 0.95rem;
+  font-weight: 500; text-decoration: none;
+  transition: all 0.3s; position: relative;
+}
+.btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+
+footer {
+  padding: 3rem 3rem 2rem; border-top: 1px solid var(--mist);
+  display: flex; justify-content: space-between; align-items: center;
+  max-width: 1100px; margin: 0 auto;
+}
+.footer-logo {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 900; font-size: 1.2rem; text-decoration: none; color: var(--ink);
+}
+.footer-logo span { color: var(--warm); }
+.footer-copy { font-size: 0.82rem; color: #aaa; }
+
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s, transform 0.8s; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 900px) {
+  .nav-links, .nav-cta { display: none; }
+  .intro-grid { grid-template-columns: 1fr; }
+  .parts-grid { grid-template-columns: repeat(2, 1fr); }
+  .benefits-grid { grid-template-columns: 1fr; }
+  .sequence-item { grid-template-columns: 60px 1fr; }
+  section { padding: 4rem 1.5rem; }
+  .page-hero { padding: 8rem 1.5rem 4rem; }
+  .nav { padding: 1rem 1.5rem; }
+  footer { flex-direction: column; gap: 1rem; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-logo">고요<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">소개</a></li>
+    <li><a href="index.html#programs">프로그램</a></li>
+    <li><a href="index.html#schedule">일정</a></li>
+    <li><a href="index.html#reviews">후기</a></li>
+    <li><a href="index.html#contact">문의</a></li>
+  </ul>
+  <a href="index.html#contact" class="nav-cta">체험 신청</a>
+</nav>
+
+<section class="page-hero">
+  <div class="breadcrumb">
+    <a href="index.html">홈</a>
+    <span>›</span>
+    <a href="index.html#programs">프로그램</a>
+    <span>›</span>
+    <span>도인체조</span>
+  </div>
+  <h1><em>도인체조</em><br>導引體操</h1>
+  <p class="page-hero-desc">
+    기(氣)를 이끌어(導) 몸 안으로 들여보내는(引) 전통 움직임 수련.
+    부드럽고 느린 동작으로 경락을 자극하고,
+    기혈의 흐름을 바로잡아 온몸에 활력을 되살립니다.
+  </p>
+</section>
+
+<!-- INTRO -->
+<section>
+  <div class="container">
+    <div class="intro-grid reveal">
+      <div class="intro-text">
+        <div class="section-label">WHAT IS DOIN CHEJO</div>
+        <h2 class="section-title">도인체조란<br>무엇인가요?</h2>
+        <p>
+          도인(導引)은 중국 전한시대 마왕퇴 한묘에서 발견된 '도인도(導引圖)'에도 기록된
+          동양 최고(最古)의 건강 운동법 중 하나입니다.
+          국선도에서는 이 전통을 한국적으로 계승·발전시켜
+          단전호흡과 기 수련의 준비 과정이자 독립된 수련 체계로 활용합니다.
+        </p>
+        <p>
+          일반 체조와 달리, 도인체조는 근육의 수축·이완보다
+          경락(經絡)의 소통과 관절의 가동 범위 확보에 초점을 둡니다.
+          느리고 부드러운 움직임 속에 호흡을 결합하여
+          동작 자체가 명상이 되는 '움직이는 기공(氣功)'입니다.
+        </p>
+        <p>
+          나이, 체력, 유연성에 관계없이 누구나 따라 할 수 있으며,
+          특히 아침 기상 후나 장시간 좌업 후
+          뭉친 몸을 풀어주는 데 탁월한 효과가 있습니다.
+        </p>
+      </div>
+      <div class="intro-visual">
+        <div class="intro-visual-icon">導</div>
+        <div class="intro-visual-label">Guiding Energy Through Motion</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BODY PARTS -->
+<section class="parts-section">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">TARGET AREAS</div>
+      <h2 class="section-title" style="color:var(--paper);">부위별 수련 체계</h2>
+    </div>
+    <div class="parts-grid">
+      <div class="part-card reveal">
+        <div class="part-icon">🦴</div>
+        <h3>목 · 경추</h3>
+        <p>전후좌우 회전과 이완으로 경추의 긴장을 풀고 뇌로 가는 혈류를 개선합니다.</p>
+      </div>
+      <div class="part-card reveal">
+        <div class="part-icon">💪</div>
+        <h3>어깨 · 견갑</h3>
+        <p>견갑골을 크게 움직이며 오십견을 예방하고 상체 경락의 흐름을 활성화합니다.</p>
+      </div>
+      <div class="part-card reveal">
+        <div class="part-icon">🔄</div>
+        <h3>척추 · 허리</h3>
+        <p>전굴, 후굴, 측굴, 회전으로 척추 마디마디의 유연성을 회복하고 요통을 예방합니다.</p>
+      </div>
+      <div class="part-card reveal">
+        <div class="part-icon">🦵</div>
+        <h3>고관절 · 하체</h3>
+        <p>고관절 개방과 하체 스트레칭으로 하반신 혈액순환을 촉진하고 좌식 자세를 안정시킵니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEQUENCE -->
+<section class="sequence-section">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">MOVEMENT SEQUENCE</div>
+      <h2 class="section-title">기본 동작 순서</h2>
+    </div>
+    <div class="sequence-list">
+      <div class="sequence-item reveal">
+        <div class="seq-num">1</div>
+        <div class="seq-content">
+          <h3>두드리기 (타법)</h3>
+          <div class="hanja">打法 — 경락 자극</div>
+          <p>손바닥과 주먹으로 머리, 얼굴, 팔, 다리, 복부를 순서대로 두드려 경혈을 자극합니다. 막힌 기혈을 풀고 신체 감각을 깨우는 첫 단계입니다.</p>
+          <div class="seq-meta">
+            <span>⏱ 약 5분</span>
+            <span>📍 전신 경혈 자극</span>
+          </div>
+        </div>
+      </div>
+      <div class="sequence-item reveal">
+        <div class="seq-num">2</div>
+        <div class="seq-content">
+          <h3>목 풀기</h3>
+          <div class="hanja">頸部 導引 — 경추 이완</div>
+          <p>고개를 전후좌우로 천천히 기울이고, 크게 원을 그리며 경추 주변 근육과 인대를 이완합니다. 호흡에 맞춰 들숨에 올리고 날숨에 내립니다.</p>
+          <div class="seq-meta">
+            <span>⏱ 약 3분</span>
+            <span>📍 경추 7개 마디</span>
+          </div>
+        </div>
+      </div>
+      <div class="sequence-item reveal">
+        <div class="seq-num">3</div>
+        <div class="seq-content">
+          <h3>어깨 · 팔 풀기</h3>
+          <div class="hanja">肩臂 導引 — 견갑 활성</div>
+          <p>팔을 크게 돌리고 견갑골을 모았다 벌리며 어깨 관절의 전체 가동 범위를 사용합니다. 손목, 팔꿈치까지 이어지는 상지 경락을 소통시킵니다.</p>
+          <div class="seq-meta">
+            <span>⏱ 약 5분</span>
+            <span>📍 견관절 · 상지 경락</span>
+          </div>
+        </div>
+      </div>
+      <div class="sequence-item reveal">
+        <div class="seq-num">4</div>
+        <div class="seq-content">
+          <h3>척추 풀기</h3>
+          <div class="hanja">脊椎 導引 — 척추 유연화</div>
+          <p>서서 또는 앉아서 척추를 마디마디 말아 올리고 펴는 동작을 반복합니다. 고양이 자세와 유사하지만, 호흡과 의념을 결합하여 각 척추 사이의 공간을 넓혀갑니다.</p>
+          <div class="seq-meta">
+            <span>⏱ 약 5분</span>
+            <span>📍 흉추 · 요추</span>
+          </div>
+        </div>
+      </div>
+      <div class="sequence-item reveal">
+        <div class="seq-num">5</div>
+        <div class="seq-content">
+          <h3>허리 · 골반 풀기</h3>
+          <div class="hanja">腰骨盤 導引 — 하단전 활성</div>
+          <p>골반을 크게 돌리고 허리를 좌우로 비트는 동작으로 대맥(帶脈)을 자극합니다. 하단전 주변의 기 순환을 촉진하고 요통을 예방합니다.</p>
+          <div class="seq-meta">
+            <span>⏱ 약 4분</span>
+            <span>📍 요추 · 골반 · 대맥</span>
+          </div>
+        </div>
+      </div>
+      <div class="sequence-item reveal">
+        <div class="seq-num">6</div>
+        <div class="seq-content">
+          <h3>하체 · 고관절 풀기</h3>
+          <div class="hanja">下肢 導引 — 하체 소통</div>
+          <p>고관절을 열고 닫는 나비 동작, 다리 펴기, 발목 돌리기 등으로 하반신 전체의 경락을 소통시킵니다. 좌식 수련을 위한 고관절 유연성을 확보합니다.</p>
+          <div class="seq-meta">
+            <span>⏱ 약 5분</span>
+            <span>📍 고관절 · 슬관절 · 족관절</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section>
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">BENEFITS</div>
+      <h2 class="section-title">도인체조의 효과</h2>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-card reveal">
+        <div class="benefit-icon">🌿</div>
+        <h3>경락 소통</h3>
+        <p>12경락과 기경팔맥을 골고루 자극하여 기혈의 정체를 풀고 전신의 에너지 순환을 원활하게 합니다.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-icon">🦴</div>
+        <h3>관절 건강</h3>
+        <p>전신 관절의 활액 분비를 촉진하고 인대와 건의 탄력을 유지하여 퇴행성 관절 질환을 예방합니다.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-icon">🧘</div>
+        <h3>좌식 수련 준비</h3>
+        <p>고관절과 척추의 유연성을 확보하여 장시간 좌식 명상이나 단전호흡 시 통증 없이 자세를 유지할 수 있게 합니다.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-icon">🔋</div>
+        <h3>아침 활력</h3>
+        <p>기상 직후 10분만 실시해도 혈액순환이 촉진되고 뇌에 산소 공급이 늘어 하루를 맑은 정신으로 시작할 수 있습니다.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-icon">💺</div>
+        <h3>좌업 피로 해소</h3>
+        <p>장시간 앉아 일하는 직장인에게 특히 효과적입니다. 뭉친 목, 어깨, 허리를 풀고 거북목·라운드숄더를 교정합니다.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-icon">👴</div>
+        <h3>시니어 건강</h3>
+        <p>충격이 없는 저강도 운동으로 고령자도 안전하게 수행할 수 있으며, 낙상 예방과 균형 감각 유지에 탁월합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON -->
+<section style="background: var(--cloud);">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">COMPARISON</div>
+      <h2 class="section-title">도인체조 vs 일반 스트레칭</h2>
+    </div>
+    <table class="compare-table reveal">
+      <thead>
+        <tr>
+          <th>항목</th>
+          <th>일반 스트레칭</th>
+          <th class="compare-highlight">도인체조</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>목적</td>
+          <td>근육 이완, 유연성</td>
+          <td class="compare-highlight">경락 소통, 기혈 순환</td>
+        </tr>
+        <tr>
+          <td>호흡</td>
+          <td>자유 호흡</td>
+          <td class="compare-highlight">동작과 호흡 동기화</td>
+        </tr>
+        <tr>
+          <td>의식</td>
+          <td>근육 부위 집중</td>
+          <td class="compare-highlight">경혈·경락에 의념 집중</td>
+        </tr>
+        <tr>
+          <td>속도</td>
+          <td>다양함</td>
+          <td class="compare-highlight">일관되게 느리고 부드럽게</td>
+        </tr>
+        <tr>
+          <td>효과 범위</td>
+          <td>근골격계</td>
+          <td class="compare-highlight">근골격 + 자율신경 + 내장기</td>
+        </tr>
+        <tr>
+          <td>연결 수련</td>
+          <td>단독 실시</td>
+          <td class="compare-highlight">단전호흡·기 수련의 전 단계</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">자주 묻는 질문</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <button class="faq-question">도인체조만 따로 배울 수 있나요?</button>
+        <div class="faq-answer">
+          <p>물론입니다. 도인체조는 단전호흡이나 기 수련의 준비 과정이기도 하지만, 그 자체로 완결된 건강 운동 체계입니다. 도인체조만 수강하시는 분들도 많으며, 이후 관심이 생기면 단전호흡으로 확장하실 수 있습니다.</p>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-question">나이가 많아도 할 수 있나요?</button>
+        <div class="faq-answer">
+          <p>도인체조는 충격이 전혀 없는 저강도 운동이므로 60~70대 이상도 안전하게 참여할 수 있습니다. 실제로 시니어 수련생 비율이 높으며, 각자의 가동 범위 내에서 무리 없이 진행됩니다.</p>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-question">요가 스트레칭과 뭐가 다른가요?</button>
+        <div class="faq-answer">
+          <p>요가는 아사나(자세)의 정렬과 유지에 초점을 두고, 도인체조는 경락의 소통과 기의 흐름에 초점을 둡니다. 동작의 형태가 비슷해 보일 수 있지만, 의식을 집중하는 대상(근육 vs 경혈)과 내적 수련의 방향이 다릅니다.</p>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-question">집에서 혼자 연습할 수 있나요?</button>
+        <div class="faq-answer">
+          <p>기본 동작을 익힌 후에는 집에서 자율 수련이 가능합니다. 아침 기상 후 10~15분만 실시해도 충분한 효과를 느낄 수 있으며, 수업에서 배운 순서대로 따라 하시면 됩니다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div style="padding: 0 3rem;">
+  <div class="cta-banner reveal">
+    <h2>도인체조 첫 수업,<br>무료로 체험하세요</h2>
+    <p>모든 국선도 수업 시작 시 도인체조가 포함됩니다.<br>월 · 수 · 금 오전 10시 기초반에서 만나보세요.</p>
+    <a href="index.html#contact" class="btn-white">무료 체험 신청 →</a>
+  </div>
+</div>
+
+<footer>
+  <a href="index.html" class="footer-logo">고요<span>.</span></a>
+  <div class="footer-copy">© 2026 고요. All rights reserved.</div>
+</footer>
+
+<script>
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); });
+
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+reveals.forEach(el => observer.observe(el));
+
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  });
+});
+</script>
+
+</body>
+</html>
