@@ -27,8 +27,6 @@ body {
   overflow-x: hidden;
   line-height: 1.7;
 }
-
-/* ── NAV ── */
 .nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
@@ -65,8 +63,6 @@ body {
   font-size: 0.88rem; font-weight: 500; transition: all 0.3s;
 }
 .nav-cta:hover { background: var(--ink); color: var(--paper); }
-
-/* ── HERO ── */
 .hero {
   min-height: 100vh; display: flex; align-items: center; justify-content: center;
   position: relative; overflow: hidden;
@@ -103,21 +99,17 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 .hero-badge {
-  display: inline-block;
-  padding: 0.4rem 1.4rem;
-  border: 1px solid var(--warm);
-  border-radius: 100px;
+  display: inline-block; padding: 0.4rem 1.4rem;
+  border: 1px solid var(--warm); border-radius: 100px;
   font-size: 0.82rem; font-weight: 500;
   color: var(--warm); letter-spacing: 0.15em;
-  margin-bottom: 2rem;
-  animation: fadeUp 1.2s ease-out 0.2s both;
+  margin-bottom: 2rem; animation: fadeUp 1.2s ease-out 0.2s both;
 }
 .hero h1 {
   font-family: 'Noto Serif KR', serif;
   font-weight: 900; font-size: clamp(3rem, 7vw, 6rem);
   line-height: 1.15; letter-spacing: -0.03em;
-  margin-bottom: 1.5rem;
-  animation: fadeUp 1.2s ease-out 0.4s both;
+  margin-bottom: 1.5rem; animation: fadeUp 1.2s ease-out 0.4s both;
 }
 .hero h1 em {
   font-style: normal;
@@ -138,15 +130,13 @@ body {
 .btn-primary {
   padding: 0.9rem 2.4rem; background: var(--ink); color: var(--paper);
   border: none; border-radius: 100px; font-size: 0.95rem;
-  font-weight: 500; cursor: pointer; text-decoration: none;
-  transition: all 0.3s;
+  font-weight: 500; cursor: pointer; text-decoration: none; transition: all 0.3s;
 }
 .btn-primary:hover { background: var(--warm); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(201,169,110,0.3); }
 .btn-secondary {
   padding: 0.9rem 2.4rem; background: transparent; color: var(--ink);
   border: 1.5px solid var(--mist); border-radius: 100px;
-  font-size: 0.95rem; font-weight: 500; cursor: pointer; text-decoration: none;
-  transition: all 0.3s;
+  font-size: 0.95rem; font-weight: 500; cursor: pointer; text-decoration: none; transition: all 0.3s;
 }
 .btn-secondary:hover { border-color: var(--ink); }
 .hero-scroll {
@@ -159,81 +149,58 @@ body {
   0%, 100% { transform: translateX(-50%) translateY(0); }
   50% { transform: translateX(-50%) translateY(8px); }
 }
-
-/* ── SECTION COMMONS ── */
 section { padding: 7rem 3rem; }
 .section-label {
   display: inline-block; font-size: 0.78rem;
   font-weight: 500; letter-spacing: 0.2em;
-  color: var(--warm); text-transform: uppercase;
-  margin-bottom: 1rem;
+  color: var(--warm); text-transform: uppercase; margin-bottom: 1rem;
 }
 .section-title {
   font-family: 'Noto Serif KR', serif;
   font-weight: 700; font-size: clamp(2rem, 4vw, 3rem);
-  line-height: 1.3; letter-spacing: -0.02em;
-  margin-bottom: 1.2rem;
+  line-height: 1.3; letter-spacing: -0.02em; margin-bottom: 1.2rem;
 }
 .section-desc {
   font-size: 1.05rem; color: #7a7168;
   max-width: 560px; font-weight: 300; line-height: 1.9;
 }
-
-/* ── ABOUT ── */
 .about {
   display: grid; grid-template-columns: 1fr 1fr;
-  gap: 5rem; align-items: center;
-  max-width: 1200px; margin: 0 auto;
+  gap: 5rem; align-items: center; max-width: 1200px; margin: 0 auto;
 }
-.about-visual {
-  position: relative; height: 500px;
-}
+.about-visual { position: relative; height: 500px; }
 .about-card {
   position: absolute; border-radius: 16px;
-  overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.08);
-  transition: transform 0.5s;
+  overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.08); transition: transform 0.5s;
 }
 .about-card:hover { transform: translateY(-8px) rotate(0deg) !important; }
 .about-card:nth-child(1) {
-  width: 280px; height: 340px; top: 0; left: 20px;
-  transform: rotate(-3deg);
+  width: 280px; height: 340px; top: 0; left: 20px; transform: rotate(-3deg);
   background: linear-gradient(135deg, #d4cfc5, #c9a96e);
   display: flex; align-items: center; justify-content: center;
 }
 .about-card:nth-child(2) {
-  width: 240px; height: 300px; top: 80px; right: 0;
-  transform: rotate(2deg);
+  width: 240px; height: 300px; top: 80px; right: 0; transform: rotate(2deg);
   background: linear-gradient(135deg, #7a8b6f, #5a6b4f);
   display: flex; align-items: center; justify-content: center;
 }
 .about-card:nth-child(3) {
-  width: 200px; height: 200px; bottom: 0; left: 60px;
-  transform: rotate(-1deg);
+  width: 200px; height: 200px; bottom: 0; left: 60px; transform: rotate(-1deg);
   background: linear-gradient(135deg, #b5654a, #8b4a35);
   display: flex; align-items: center; justify-content: center;
 }
-.card-icon {
-  font-size: 4rem; opacity: 0.6; color: white;
-  font-family: 'Noto Serif KR', serif;
-}
-.about-stats {
-  display: flex; gap: 2.5rem; margin-top: 2.5rem;
-}
+.card-icon { font-size: 4rem; opacity: 0.6; color: white; font-family: 'Noto Serif KR', serif; }
+.about-stats { display: flex; gap: 2.5rem; margin-top: 2.5rem; }
 .stat-item { text-align: left; }
 .stat-num {
   font-family: 'Noto Serif KR', serif;
-  font-size: 2.2rem; font-weight: 700; color: var(--warm);
-  line-height: 1;
+  font-size: 2.2rem; font-weight: 700; color: var(--warm); line-height: 1;
 }
 .stat-label { font-size: 0.85rem; color: #999; margin-top: 0.3rem; }
-
-/* ── PROGRAMS (3 columns) ── */
 .programs { background: var(--deep); color: var(--paper); }
 .programs .section-label { color: var(--warm); }
 .programs .section-desc { color: #a89f94; }
-.programs-header {
-  text-align: center; max-width: 600px; margin: 0 auto 4rem;
-}
+.programs-header { text-align: center; max-width: 600px; margin: 0 auto 4rem; }
 .programs-grid {
   display: grid; grid-template-columns: repeat(3, 1fr);
   gap: 2rem; max-width: 1200px; margin: 0 auto;
@@ -261,42 +228,29 @@ section { padding: 7rem 3rem; }
 .program-card:nth-child(3) .program-icon { background: rgba(181,101,74,0.2); }
 .program-card h3 {
   font-family: 'Noto Serif KR', serif;
-  font-size: 1.35rem; font-weight: 700;
-  margin-bottom: 0.8rem;
+  font-size: 1.35rem; font-weight: 700; margin-bottom: 0.8rem;
 }
 .program-card p { font-size: 0.95rem; color: #a89f94; line-height: 1.8; margin-bottom: 1.5rem; }
 .program-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 .program-tag {
   padding: 0.3rem 0.9rem; border-radius: 100px;
-  font-size: 0.78rem; border: 1px solid rgba(255,255,255,0.12);
-  color: #ccc;
+  font-size: 0.78rem; border: 1px solid rgba(255,255,255,0.12); color: #ccc;
 }
 .program-tag-link {
-  text-decoration: none; cursor: pointer;
-  transition: all 0.3s;
+  text-decoration: none; cursor: pointer; transition: all 0.3s;
 }
 .program-tag-link:hover {
-  background: var(--warm); color: var(--deep);
-  border-color: var(--warm);
+  background: var(--warm); color: var(--deep); border-color: var(--warm);
 }
-
-/* ── SCHEDULE ── */
 .schedule { max-width: 1000px; margin: 0 auto; }
 .schedule-header { margin-bottom: 3rem; }
-.schedule-table {
-  width: 100%; border-collapse: collapse;
-}
+.schedule-table { width: 100%; border-collapse: collapse; }
 .schedule-table th {
   text-align: left; padding: 1rem 1.5rem;
   font-weight: 500; font-size: 0.85rem;
-  color: #999; letter-spacing: 0.1em;
-  border-bottom: 2px solid var(--mist);
+  color: #999; letter-spacing: 0.1em; border-bottom: 2px solid var(--mist);
 }
-.schedule-table td {
-  padding: 1.2rem 1.5rem;
-  border-bottom: 1px solid var(--cloud);
-  font-size: 0.95rem;
-}
+.schedule-table td { padding: 1.2rem 1.5rem; border-bottom: 1px solid var(--cloud); font-size: 0.95rem; }
 .schedule-table tr { transition: background 0.3s; }
 .schedule-table tbody tr:hover { background: var(--cloud); }
 .schedule-tag {
@@ -306,11 +260,7 @@ section { padding: 7rem 3rem; }
 .tag-yoga { background: var(--gold-glow); color: var(--warm); }
 .tag-ksd { background: rgba(122,139,111,0.12); color: var(--sage); }
 .tag-med { background: rgba(181,101,74,0.12); color: var(--rust); }
-
-/* ── TESTIMONIALS ── */
-.testimonials {
-  background: linear-gradient(180deg, var(--cloud) 0%, var(--paper) 100%);
-}
+.testimonials { background: linear-gradient(180deg, var(--cloud) 0%, var(--paper) 100%); }
 .testimonials-header { text-align: center; margin-bottom: 4rem; }
 .testimonials-grid {
   display: grid; grid-template-columns: repeat(3, 1fr);
@@ -319,18 +269,14 @@ section { padding: 7rem 3rem; }
 .testimonial-card {
   background: white; border-radius: 20px;
   padding: 2.5rem 2rem; position: relative;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
-  transition: transform 0.4s;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.04); transition: transform 0.4s;
 }
 .testimonial-card:hover { transform: translateY(-4px); }
 .testimonial-quote {
   font-size: 3rem; color: var(--warm); opacity: 0.3;
   font-family: Georgia, serif; line-height: 1; margin-bottom: 1rem;
 }
-.testimonial-card p {
-  font-size: 0.95rem; color: #6b6157; line-height: 1.9;
-  margin-bottom: 1.5rem; font-weight: 300;
-}
+.testimonial-card p { font-size: 0.95rem; color: #6b6157; line-height: 1.9; margin-bottom: 1.5rem; font-weight: 300; }
 .testimonial-author { display: flex; align-items: center; gap: 0.8rem; }
 .testimonial-avatar {
   width: 44px; height: 44px; border-radius: 50%;
@@ -339,8 +285,6 @@ section { padding: 7rem 3rem; }
 }
 .testimonial-name { font-weight: 500; font-size: 0.9rem; }
 .testimonial-role { font-size: 0.8rem; color: #999; }
-
-/* ── CTA BANNER ── */
 .cta-banner {
   background: var(--deep); color: var(--paper);
   text-align: center; padding: 6rem 3rem;
@@ -352,12 +296,7 @@ section { padding: 7rem 3rem; }
 }
 .cta-banner .section-title { margin-bottom: 1rem; }
 .cta-banner p { color: #a89f94; margin: 0 auto 2.5rem; max-width: 500px; font-weight: 300; }
-
-/* ── FOOTER ── */
-footer {
-  padding: 4rem 3rem 2rem;
-  border-top: 1px solid var(--mist);
-}
+footer { padding: 4rem 3rem 2rem; border-top: 1px solid var(--mist); }
 .footer-grid {
   display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
   gap: 3rem; max-width: 1200px; margin: 0 auto 3rem;
@@ -370,38 +309,20 @@ footer {
 .footer-desc { font-size: 0.9rem; color: #999; line-height: 1.8; max-width: 300px; }
 .footer-col h4 {
   font-size: 0.82rem; font-weight: 500;
-  letter-spacing: 0.15em; color: var(--warm);
-  margin-bottom: 1.2rem;
+  letter-spacing: 0.15em; color: var(--warm); margin-bottom: 1.2rem;
 }
 .footer-col ul { list-style: none; }
 .footer-col li { margin-bottom: 0.6rem; }
-.footer-col a {
-  text-decoration: none; color: #777;
-  font-size: 0.9rem; transition: color 0.3s;
-}
+.footer-col a { text-decoration: none; color: #777; font-size: 0.9rem; transition: color 0.3s; }
 .footer-col a:hover { color: var(--ink); }
 .footer-bottom {
   text-align: center; padding-top: 2rem;
-  border-top: 1px solid var(--cloud);
-  font-size: 0.82rem; color: #aaa;
+  border-top: 1px solid var(--cloud); font-size: 0.82rem; color: #aaa;
 }
-
-/* ── MOBILE MENU ── */
 .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; }
-.nav-toggle span {
-  display: block; width: 22px; height: 2px;
-  background: var(--ink); margin: 5px 0;
-  transition: all 0.3s;
-}
-
-/* ── SCROLL ANIMATIONS ── */
-.reveal {
-  opacity: 0; transform: translateY(30px);
-  transition: opacity 0.8s, transform 0.8s;
-}
+.nav-toggle span { display: block; width: 22px; height: 2px; background: var(--ink); margin: 5px 0; transition: all 0.3s; }
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s, transform 0.8s; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
-
-/* ── RESPONSIVE ── */
 @media (max-width: 900px) {
   .nav-links, .nav-cta { display: none; }
   .nav-toggle { display: block; }
@@ -409,14 +330,9 @@ footer {
     display: flex; flex-direction: column;
     position: absolute; top: 100%; left: 0; right: 0;
     background: rgba(245,240,232,0.97);
-    padding: 2rem 3rem; gap: 1.5rem;
-    border-bottom: 1px solid var(--mist);
+    padding: 2rem 3rem; gap: 1.5rem; border-bottom: 1px solid var(--mist);
   }
-  .nav.open .nav-cta {
-    display: inline-block;
-    position: absolute; top: 100%; right: 3rem;
-    margin-top: -3.5rem;
-  }
+  .nav.open .nav-cta { display: inline-block; position: absolute; top: 100%; right: 3rem; margin-top: -3.5rem; }
   .about { grid-template-columns: 1fr; gap: 3rem; }
   .about-visual { height: 350px; }
   .programs-grid { grid-template-columns: 1fr; }
@@ -430,10 +346,8 @@ footer {
 </style>
 </head>
 <body>
-
-<!-- NAV -->
 <nav class="nav" id="nav">
-  <a href="#" class="nav-logo">트래블러명상<span>.</span></a>
+  <a href="#" class="nav-logo">고요<span>.</span></a>
   <ul class="nav-links">
     <li><a href="#about">소개</a></li>
     <li><a href="#programs">프로그램</a></li>
@@ -446,8 +360,6 @@ footer {
     <span></span><span></span><span></span>
   </button>
 </nav>
-
-<!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-bg-circle"></div>
   <div class="hero-bg-circle"></div>
@@ -463,8 +375,6 @@ footer {
   </div>
   <div class="hero-scroll">SCROLL<br>↓</div>
 </section>
-
-<!-- ABOUT -->
 <section id="about" style="padding-top:8rem; padding-bottom:8rem;">
   <div class="about">
     <div class="about-visual reveal">
@@ -497,8 +407,6 @@ footer {
     </div>
   </div>
 </section>
-
-<!-- PROGRAMS -->
 <section class="programs" id="programs">
   <div class="programs-header reveal">
     <div class="section-label">PROGRAMS</div>
@@ -512,7 +420,7 @@ footer {
       <p>호흡과 자세의 조화를 통해 몸의 유연성과 내면의 평화를 동시에 키워갑니다. 하타, 빈야사, 음요가 등 다양한 스타일을 경험하세요.</p>
       <div class="program-tags">
         <a href="hatha-yoga.html" class="program-tag program-tag-link">하타요가</a>
-        <span class="program-tag">빈야사</span>
+        <a href="vinyasa.html" class="program-tag program-tag-link">빈야사</a>
         <span class="program-tag">음요가</span>
       </div>
     </div>
@@ -538,8 +446,6 @@ footer {
     </div>
   </div>
 </section>
-
-<!-- SCHEDULE -->
 <section id="schedule">
   <div class="schedule">
     <div class="schedule-header reveal">
@@ -549,56 +455,19 @@ footer {
     </div>
     <table class="schedule-table reveal">
       <thead>
-        <tr>
-          <th>요일</th>
-          <th>시간</th>
-          <th>프로그램</th>
-          <th>대상</th>
-        </tr>
+        <tr><th>요일</th><th>시간</th><th>프로그램</th><th>대상</th></tr>
       </thead>
       <tbody>
-        <tr>
-          <td>월 · 수</td>
-          <td>07:00 – 08:00</td>
-          <td><span class="schedule-tag tag-yoga">요가</span> 모닝 하타요가</td>
-          <td>전 레벨</td>
-        </tr>
-        <tr>
-          <td>월 · 수 · 금</td>
-          <td>10:00 – 11:30</td>
-          <td><span class="schedule-tag tag-ksd">국선도</span> 기초 단전호흡</td>
-          <td>초급</td>
-        </tr>
-        <tr>
-          <td>화 · 목</td>
-          <td>19:00 – 20:00</td>
-          <td><span class="schedule-tag tag-yoga">요가</span> 직장인 빈야사</td>
-          <td>전 레벨</td>
-        </tr>
-        <tr>
-          <td>화 · 목</td>
-          <td>20:15 – 21:00</td>
-          <td><span class="schedule-tag tag-med">명상</span> 마음챙김 명상</td>
-          <td>전 레벨</td>
-        </tr>
-        <tr>
-          <td>토</td>
-          <td>09:00 – 11:00</td>
-          <td><span class="schedule-tag tag-ksd">국선도</span> 심화 기 수련</td>
-          <td>중급 이상</td>
-        </tr>
-        <tr>
-          <td>일</td>
-          <td>10:00 – 11:30</td>
-          <td><span class="schedule-tag tag-med">명상</span> 주말 힐링 명상</td>
-          <td>전 레벨</td>
-        </tr>
+        <tr><td>월 · 수</td><td>07:00 – 08:00</td><td><span class="schedule-tag tag-yoga">요가</span> 모닝 하타요가</td><td>전 레벨</td></tr>
+        <tr><td>월 · 수 · 금</td><td>10:00 – 11:30</td><td><span class="schedule-tag tag-ksd">국선도</span> 기초 단전호흡</td><td>초급</td></tr>
+        <tr><td>화 · 목</td><td>19:00 – 20:00</td><td><span class="schedule-tag tag-yoga">요가</span> 직장인 빈야사</td><td>전 레벨</td></tr>
+        <tr><td>화 · 목</td><td>20:15 – 21:00</td><td><span class="schedule-tag tag-med">명상</span> 마음챙김 명상</td><td>전 레벨</td></tr>
+        <tr><td>토</td><td>09:00 – 11:00</td><td><span class="schedule-tag tag-ksd">국선도</span> 심화 기 수련</td><td>중급 이상</td></tr>
+        <tr><td>일</td><td>10:00 – 11:30</td><td><span class="schedule-tag tag-med">명상</span> 주말 힐링 명상</td><td>전 레벨</td></tr>
       </tbody>
     </table>
   </div>
 </section>
-
-<!-- TESTIMONIALS -->
 <section class="testimonials" id="reviews">
   <div class="testimonials-header reveal">
     <div class="section-label">REVIEWS</div>
@@ -610,10 +479,7 @@ footer {
       <p>요가를 시작한 지 6개월, 만성 어깨 통증이 거의 사라졌어요. 몸이 가벼워지니 마음도 함께 편해지더라고요.</p>
       <div class="testimonial-author">
         <div class="testimonial-avatar" style="background:var(--warm);">김</div>
-        <div>
-          <div class="testimonial-name">김지현</div>
-          <div class="testimonial-role">요가 수강 6개월</div>
-        </div>
+        <div><div class="testimonial-name">김지현</div><div class="testimonial-role">요가 수강 6개월</div></div>
       </div>
     </div>
     <div class="testimonial-card reveal">
@@ -621,10 +487,7 @@ footer {
       <p>국선도 단전호흡을 배우고 나서 집중력과 체력이 눈에 띄게 좋아졌습니다. 한국 전통 수련의 깊이를 느낍니다.</p>
       <div class="testimonial-author">
         <div class="testimonial-avatar" style="background:var(--sage);">박</div>
-        <div>
-          <div class="testimonial-name">박성훈</div>
-          <div class="testimonial-role">국선도 수련 1년</div>
-        </div>
+        <div><div class="testimonial-name">박성훈</div><div class="testimonial-role">국선도 수련 1년</div></div>
       </div>
     </div>
     <div class="testimonial-card reveal">
@@ -632,17 +495,11 @@ footer {
       <p>매일 15분 명상을 시작한 뒤로 수면의 질이 확 달라졌어요. 불안감이 줄고 하루를 더 차분하게 보내게 됩니다.</p>
       <div class="testimonial-author">
         <div class="testimonial-avatar" style="background:var(--rust);">이</div>
-        <div>
-          <div class="testimonial-name">이수연</div>
-          <div class="testimonial-role">명상 수강 3개월</div>
-        </tr>
-        </div>
+        <div><div class="testimonial-name">이수연</div><div class="testimonial-role">명상 수강 3개월</div></div>
       </div>
     </div>
   </div>
 </section>
-
-<!-- CTA -->
 <section class="cta-banner" id="contact">
   <div class="reveal" style="position:relative;z-index:1;">
     <div class="section-label">GET STARTED</div>
@@ -651,8 +508,6 @@ footer {
     <a href="mailto:sung7uk@naver.com" class="btn-primary" style="font-size:1rem;">무료 체험 신청하기</a>
   </div>
 </section>
-
-<!-- FOOTER -->
 <footer>
   <div class="footer-grid">
     <div>
@@ -687,39 +542,21 @@ footer {
       </ul>
     </div>
   </div>
-  <div class="footer-bottom">
-    © 2026 고요. All rights reserved.
-  </div>
+  <div class="footer-bottom">© 2026 고요. All rights reserved.</div>
 </footer>
-
 <script>
-// Nav scroll effect
 const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 50);
-});
-
-// Mobile toggle
+window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); });
 const toggle = document.getElementById('navToggle');
 toggle.addEventListener('click', () => nav.classList.toggle('open'));
-
-// Close mobile menu on link click
-document.querySelectorAll('.nav-links a').forEach(a => {
-  a.addEventListener('click', () => nav.classList.remove('open'));
-});
-
-// Scroll reveal
+document.querySelectorAll('.nav-links a').forEach(a => { a.addEventListener('click', () => nav.classList.remove('open')); });
 const reveals = document.querySelectorAll('.reveal');
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry, i) => {
-    if (entry.isIntersecting) {
-      setTimeout(() => entry.target.classList.add('visible'), i * 100);
-      observer.unobserve(entry.target);
-    }
+    if (entry.isIntersecting) { setTimeout(() => entry.target.classList.add('visible'), i * 100); observer.unobserve(entry.target); }
   });
 }, { threshold: 0.15 });
 reveals.forEach(el => observer.observe(el));
 </script>
-
 </body>
 </html>
