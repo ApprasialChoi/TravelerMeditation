@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>기 수련 — 고요</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;500;700;900&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1612;
+  --paper: #f5f0e8;
+  --warm: #c9a96e;
+  --sage: #7a8b6f;
+  --sage-deep: #4a5e3f;
+  --rust: #b5654a;
+  --mist: #d4cfc5;
+  --cloud: #ebe6dc;
+  --deep: #2c2520;
+  --sage-glow: rgba(122, 139, 111, 0.15);
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--paper); color: var(--ink);
+  overflow-x: hidden; line-height: 1.7;
+}
+
+/* ── NAV ── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.2rem 3rem;
+  background: rgba(245, 240, 232, 0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--mist);
+}
+.nav.scrolled { padding: 0.8rem 3rem; box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
+.nav-logo {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 900; font-size: 1.5rem;
+  letter-spacing: -0.02em; color: var(--ink); text-decoration: none;
+}
+.nav-logo span { color: var(--warm); }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  text-decoration: none; color: var(--ink);
+  font-weight: 400; font-size: 0.92rem;
+  position: relative; transition: color 0.3s;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; left: 0;
+  width: 0; height: 2px; background: var(--warm); transition: width 0.3s;
+}
+.nav-links a:hover { color: var(--warm); }
+.nav-links a:hover::after { width: 100%; }
+.nav-cta {
+  padding: 0.55rem 1.6rem; border: 1.5px solid var(--ink);
+  border-radius: 100px; text-decoration: none; color: var(--ink);
+  font-size: 0.88rem; font-weight: 500; transition: all 0.3s;
+}
+.nav-cta:hover { background: var(--ink); color: var(--paper); }
+
+/* ── PAGE HERO ── */
+.page-hero {
+  padding: 10rem 3rem 5rem;
+  background: linear-gradient(160deg, var(--paper) 0%, #dde4d8 50%, var(--cloud) 100%);
+  position: relative; overflow: hidden;
+}
+.page-hero::before {
+  content: ''; position: absolute; top: -100px; right: -80px;
+  width: 520px; height: 520px; border-radius: 50%;
+  background: var(--sage); opacity: 0.07;
+}
+.page-hero::after {
+  content: ''; position: absolute; bottom: -140px; left: -80px;
+  width: 380px; height: 380px; border-radius: 50%;
+  background: var(--sage-deep); opacity: 0.05;
+}
+.breadcrumb {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-size: 0.85rem; color: #999; margin-bottom: 2rem;
+}
+.breadcrumb a { color: var(--sage); text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.page-hero h1 {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 900; font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 1.2rem;
+}
+.page-hero h1 em {
+  font-style: normal;
+  background: linear-gradient(135deg, var(--sage), var(--sage-deep));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.page-hero-desc {
+  font-size: 1.1rem; color: #6b6157; max-width: 600px;
+  font-weight: 300; line-height: 1.9;
+}
+
+/* ── COMMONS ── */
+section { padding: 5rem 3rem; }
+.container { max-width: 1100px; margin: 0 auto; }
+.section-label {
+  display: inline-block; font-size: 0.78rem;
+  font-weight: 500; letter-spacing: 0.2em;
+  color: var(--sage); margin-bottom: 1rem;
+}
+.section-title {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 700; font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  line-height: 1.3; margin-bottom: 1.2rem;
+}
+
+/* ── INTRO ── */
+.intro-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 4rem; align-items: center;
+}
+.intro-text p {
+  font-size: 1rem; color: #6b6157; line-height: 2;
+  margin-bottom: 1.2rem; font-weight: 300;
+}
+.intro-visual {
+  background: linear-gradient(135deg, #c5d1be, #8a9e7e);
+  border-radius: 24px; height: 400px;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.intro-visual-icon {
+  font-size: 8rem; opacity: 0.15;
+  font-family: 'Noto Serif KR', serif; color: white;
+}
+.intro-visual-label {
+  position: absolute; bottom: 2rem; left: 2rem;
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.15rem; font-weight: 700; color: white; opacity: 0.5;
+}
+
+/* ── ENERGY PATHWAYS ── */
+.pathways-section { background: var(--deep); color: var(--paper); }
+.pathways-section .section-label { color: var(--sage); }
+.pathways-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 2rem; margin-top: 3rem;
+}
+.pathway-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px; padding: 2.5rem 2rem;
+  transition: all 0.4s; position: relative; overflow: hidden;
+}
+.pathway-card:hover { background: rgba(255,255,255,0.08); transform: translateY(-4px); }
+.pathway-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 3px; background: var(--sage);
+  transform: scaleX(0); transition: transform 0.4s;
+}
+.pathway-card:hover::before { transform: scaleX(1); }
+.pathway-symbol {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 2.8rem; font-weight: 900;
+  color: var(--sage); opacity: 0.4;
+  margin-bottom: 1rem; line-height: 1;
+}
+.pathway-card h3 {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem;
+}
+.pathway-card .sub {
+  font-size: 0.82rem; color: var(--sage); margin-bottom: 0.8rem;
+}
+.pathway-card p { font-size: 0.92rem; color: #a89f94; line-height: 1.8; }
+
+/* ── STAGES ── */
+.stages-section { background: var(--cloud); }
+.stages-timeline { max-width: 800px; position: relative; }
+.stages-timeline::before {
+  content: ''; position: absolute; left: 28px; top: 0; bottom: 0;
+  width: 2px; background: var(--sage); opacity: 0.2;
+}
+.stage-item {
+  display: flex; gap: 2rem; align-items: flex-start;
+  padding: 2rem 0; position: relative;
+}
+.stage-dot {
+  flex-shrink: 0; width: 56px; height: 56px;
+  border-radius: 50%; background: var(--sage-glow);
+  border: 3px solid var(--sage);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1rem; font-weight: 700; color: var(--sage);
+  z-index: 1;
+}
+.stage-content h3 {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.15rem; font-weight: 700; margin-bottom: 0.3rem;
+}
+.stage-content .duration {
+  font-size: 0.82rem; color: var(--sage); margin-bottom: 0.5rem;
+}
+.stage-content p { font-size: 0.95rem; color: #7a7168; line-height: 1.8; }
+
+/* ── BENEFITS ── */
+.benefits-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+  margin-top: 2.5rem;
+}
+.benefit-card {
+  background: white; border-radius: 20px;
+  padding: 2.5rem 2rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+  transition: all 0.4s;
+}
+.benefit-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
+.benefit-icon {
+  width: 56px; height: 56px; border-radius: 16px;
+  background: var(--sage-glow);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.6rem; margin-bottom: 1.2rem;
+}
+.benefit-card h3 {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.1rem; font-weight: 700; margin-bottom: 0.6rem;
+}
+.benefit-card p { font-size: 0.92rem; color: #7a7168; line-height: 1.8; }
+
+/* ── CURRICULUM ── */
+.curriculum-list { max-width: 800px; }
+.curriculum-item {
+  display: flex; gap: 2rem; align-items: flex-start;
+  padding: 2rem 0; border-bottom: 1px solid var(--cloud);
+}
+.curriculum-item:last-child { border-bottom: none; }
+.curriculum-step {
+  flex-shrink: 0; width: 56px; height: 56px;
+  border-radius: 16px; background: var(--sage-glow);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.2rem; font-weight: 700; color: var(--sage);
+}
+.curriculum-content h3 {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem;
+}
+.curriculum-content p { font-size: 0.95rem; color: #7a7168; line-height: 1.8; }
+.curriculum-meta {
+  display: flex; gap: 1.5rem; margin-top: 0.6rem;
+  font-size: 0.82rem; color: #aaa;
+}
+
+/* ── FAQ ── */
+.faq-list { max-width: 750px; }
+.faq-item { border-bottom: 1px solid var(--cloud); padding: 1.5rem 0; }
+.faq-question {
+  display: flex; justify-content: space-between; align-items: center;
+  cursor: pointer; font-weight: 500; font-size: 1rem;
+  background: none; border: none; width: 100%;
+  text-align: left; color: var(--ink); font-family: inherit; padding: 0;
+}
+.faq-question::after {
+  content: '+'; font-size: 1.4rem; color: var(--sage);
+  transition: transform 0.3s; flex-shrink: 0; margin-left: 1rem;
+}
+.faq-item.open .faq-question::after { transform: rotate(45deg); }
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s; }
+.faq-item.open .faq-answer { max-height: 300px; padding-top: 1rem; }
+.faq-answer p { font-size: 0.95rem; color: #7a7168; line-height: 1.9; font-weight: 300; }
+
+/* ── CTA ── */
+.cta-banner {
+  background: linear-gradient(135deg, var(--sage), var(--sage-deep));
+  color: white; text-align: center;
+  padding: 5rem 3rem; border-radius: 24px;
+  max-width: 1100px; margin: 0 auto 5rem;
+  position: relative; overflow: hidden;
+}
+.cta-banner::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(circle at 70% 40%, rgba(255,255,255,0.1), transparent 60%);
+}
+.cta-banner h2 {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 2rem; font-weight: 700; margin-bottom: 1rem; position: relative;
+}
+.cta-banner p { font-size: 1rem; opacity: 0.85; margin-bottom: 2rem; position: relative; }
+.btn-white {
+  display: inline-block; padding: 0.9rem 2.4rem;
+  background: white; color: var(--ink);
+  border-radius: 100px; font-size: 0.95rem;
+  font-weight: 500; text-decoration: none;
+  transition: all 0.3s; position: relative;
+}
+.btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+
+/* ── FOOTER ── */
+footer {
+  padding: 3rem 3rem 2rem; border-top: 1px solid var(--mist);
+  display: flex; justify-content: space-between; align-items: center;
+  max-width: 1100px; margin: 0 auto;
+}
+.footer-logo {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 900; font-size: 1.2rem; text-decoration: none; color: var(--ink);
+}
+.footer-logo span { color: var(--warm); }
+.footer-copy { font-size: 0.82rem; color: #aaa; }
+
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s, transform 0.8s; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 900px) {
+  .nav-links, .nav-cta { display: none; }
+  .intro-grid { grid-template-columns: 1fr; }
+  .pathways-grid { grid-template-columns: 1fr; }
+  .benefits-grid { grid-template-columns: 1fr; }
+  section { padding: 4rem 1.5rem; }
+  .page-hero { padding: 8rem 1.5rem 4rem; }
+  .nav { padding: 1rem 1.5rem; }
+  footer { flex-direction: column; gap: 1rem; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-logo">고요<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">소개</a></li>
+    <li><a href="index.html#programs">프로그램</a></li>
+    <li><a href="index.html#schedule">일정</a></li>
+    <li><a href="index.html#reviews">후기</a></li>
+    <li><a href="index.html#contact">문의</a></li>
+  </ul>
+  <a href="index.html#contact" class="nav-cta">체험 신청</a>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="breadcrumb">
+    <a href="index.html">홈</a>
+    <span>›</span>
+    <a href="index.html#programs">프로그램</a>
+    <span>›</span>
+    <span>기 수련</span>
+  </div>
+  <h1><em>기 수련</em><br>氣 修鍊</h1>
+  <p class="page-hero-desc">
+    눈에 보이지 않지만 온몸을 흐르는 생명 에너지, 기(氣).
+    국선도의 체계적인 수련법으로 기의 감각을 깨우고,
+    축적하고, 자유롭게 순환시키는 법을 익힙니다.
+  </p>
+</section>
+
+<!-- INTRO -->
+<section>
+  <div class="container">
+    <div class="intro-grid reveal">
+      <div class="intro-text">
+        <div class="section-label">WHAT IS GI SURYEON</div>
+        <h2 class="section-title">기 수련이란<br>무엇인가요?</h2>
+        <p>
+          기(氣)는 동양 전통에서 모든 생명체에 흐르는 근원적 에너지를 말합니다.
+          한의학에서는 경락(經絡)을 따라 흐르며 건강을 좌우하고,
+          국선도에서는 단전에서 축적되어 온몸으로 순환하는 것으로 봅니다.
+        </p>
+        <p>
+          기 수련은 단전호흡을 기반으로 하되, 여기에 의념(意念)의 운용과
+          특정 동작을 결합하여 기의 감각을 실제로 체험하고 다루는 단계입니다.
+          손바닥의 열감, 체내의 미세한 진동 등 구체적인 신체 반응을 통해
+          기의 존재를 직접 느끼게 됩니다.
+        </p>
+        <p>
+          현대 과학에서는 이를 생체 전기 신호, 미세 혈류 변화,
+          자율신경 반응 등과 연관 지어 연구하고 있으며,
+          실제 건강 개선 효과가 다양한 연구를 통해 보고되고 있습니다.
+        </p>
+      </div>
+      <div class="intro-visual">
+        <div class="intro-visual-icon">氣</div>
+        <div class="intro-visual-label">Life Energy Flow</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENERGY PATHWAYS -->
+<section class="pathways-section">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">ENERGY SYSTEM</div>
+      <h2 class="section-title" style="color:var(--paper);">기의 세 가지 흐름</h2>
+    </div>
+    <div class="pathways-grid">
+      <div class="pathway-card reveal">
+        <div class="pathway-symbol">任</div>
+        <h3>임맥 (任脈)</h3>
+        <div class="sub">몸의 앞면을 흐르는 음(陰)의 통로</div>
+        <p>회음부에서 시작하여 몸의 전면 중앙선을 따라 턱 아래까지 올라갑니다. 오장(五臟)의 기능을 조절하며, 단전호흡 시 날숨과 함께 기가 하강하는 경로입니다.</p>
+      </div>
+      <div class="pathway-card reveal">
+        <div class="pathway-symbol">督</div>
+        <h3>독맥 (督脈)</h3>
+        <div class="sub">몸의 뒷면을 흐르는 양(陽)의 통로</div>
+        <p>꼬리뼈에서 시작하여 척추를 따라 머리 정수리를 넘어 윗입술까지 흐릅니다. 들숨과 함께 기가 상승하며, 양기를 전신에 분배하는 핵심 경로입니다.</p>
+      </div>
+      <div class="pathway-card reveal">
+        <div class="pathway-symbol">帶</div>
+        <h3>대맥 (帶脈)</h3>
+        <div class="sub">허리를 감싸는 횡(橫)의 통로</div>
+        <p>허리 높이에서 몸을 수평으로 한 바퀴 감싸는 유일한 횡행 경맥입니다. 상하의 기 흐름을 연결하고 조율하며, 복부의 기운을 안정시키는 역할을 합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRAINING STAGES -->
+<section class="stages-section">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">TRAINING STAGES</div>
+      <h2 class="section-title">수련 단계</h2>
+    </div>
+    <div class="stages-timeline">
+      <div class="stage-item reveal">
+        <div class="stage-dot">1</div>
+        <div class="stage-content">
+          <h3>축기 (蓄氣) — 기를 모으다</h3>
+          <div class="duration">기초 과정 · 약 3~6개월</div>
+          <p>단전호흡을 통해 하단전에 기를 축적하는 단계입니다. 복식호흡의 정확한 요령을 익히고, 단전의 온기와 충실감을 느끼기 시작합니다. 손바닥에서 열감이나 미세한 저림을 체험하게 됩니다.</p>
+        </div>
+      </div>
+      <div class="stage-item reveal">
+        <div class="stage-dot">2</div>
+        <div class="stage-content">
+          <h3>운기 (運氣) — 기를 돌리다</h3>
+          <div class="duration">중급 과정 · 약 6~12개월</div>
+          <p>축적된 기를 임맥과 독맥을 따라 순환(소주천)시키는 단계입니다. 의념으로 기의 흐름을 유도하며, 척추를 따라 올라가고 전면으로 내려오는 순환 감각을 익힙니다.</p>
+        </div>
+      </div>
+      <div class="stage-item reveal">
+        <div class="stage-dot">3</div>
+        <div class="stage-content">
+          <h3>화기 (化氣) — 기를 다스리다</h3>
+          <div class="duration">심화 과정 · 1년 이상</div>
+          <p>순환의 범위를 사지 말단까지 확대(대주천)하고, 일상 속에서도 기의 흐름을 유지하는 단계입니다. 기의 질이 정화되며, 건강뿐 아니라 정서적 안정과 직관력이 함께 깊어집니다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section>
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">BENEFITS</div>
+      <h2 class="section-title">기 수련의 효과</h2>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-card reveal">
+        <div class="benefit-icon">⚡</div>
+        <h3>활력 증진</h3>
+        <p>기의 순환이 원활해지면 만성 피로가 개선되고, 아침 기상 시 상쾌함과 하루 종일 지속되는 에너지를 체감합니다.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-icon">🛡️</div>
+        <h3>면역력 강화</h3>
+        <p>기 수련은 자율신경계와 내분비계를 조율하여 체내 면역 반응을 활성화하고 질병에 대한 저항력을 높입니다.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-icon">🌊</div>
+        <h3>혈액순환 개선</h3>
+        <p>경락을 따라 기를 순환시키는 과정이 미세 혈관까지 혈류를 촉진하여 수족냉증, 부종 등의 개선에 도움을 줍니다.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-icon">🧘</div>
+        <h3>정서 안정</h3>
+        <p>기의 흐름이 균형을 이루면 감정의 기복이 줄어들고, 스트레스 상황에서도 내면의 중심을 유지하는 힘이 길러집니다.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-icon">🎯</div>
+        <h3>감각 예민화</h3>
+        <p>수련이 깊어질수록 몸의 미세한 변화를 감지하는 능력이 높아져, 건강 이상의 초기 신호를 스스로 포착할 수 있게 됩니다.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-icon">🌙</div>
+        <h3>깊은 이완</h3>
+        <p>기를 의식적으로 순환시킨 후의 이완은 일반적인 휴식과 차원이 다릅니다. 세포 단위까지 이완되는 깊은 회복을 경험합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CURRICULUM -->
+<section style="background: var(--cloud);">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">CLASS STRUCTURE</div>
+      <h2 class="section-title">수업 구성</h2>
+    </div>
+    <div class="curriculum-list">
+      <div class="curriculum-item reveal">
+        <div class="curriculum-step">01</div>
+        <div class="curriculum-content">
+          <h3>도인체조 & 경락 타법</h3>
+          <p>전신의 경락 포인트를 두드리고 스트레칭하여 기의 통로를 열어줍니다. 막힌 기혈을 풀고 수련을 위한 몸 상태를 만듭니다.</p>
+          <div class="curriculum-meta">
+            <span>⏱ 약 15분</span>
+            <span>📍 경락 활성화</span>
+          </div>
+        </div>
+      </div>
+      <div class="curriculum-item reveal">
+        <div class="curriculum-step">02</div>
+        <div class="curriculum-content">
+          <h3>기감(氣感) 수련</h3>
+          <p>양 손바닥을 마주하고 기의 감각(열감, 자력감, 밀도감)을 체험합니다. 손 사이의 거리를 조절하며 기장(氣場)을 감지하는 훈련을 합니다.</p>
+          <div class="curriculum-meta">
+            <span>⏱ 약 10분</span>
+            <span>📍 기감 체험</span>
+          </div>
+        </div>
+      </div>
+      <div class="curriculum-item reveal">
+        <div class="curriculum-step">03</div>
+        <div class="curriculum-content">
+          <h3>좌식 기 순환</h3>
+          <p>단전호흡과 함께 의념으로 기를 임맥·독맥을 따라 순환시킵니다. 강사의 안내에 따라 각자의 수준에 맞는 순환 범위로 수련합니다.</p>
+          <div class="curriculum-meta">
+            <span>⏱ 약 25분</span>
+            <span>📍 소주천 · 의념 운용</span>
+          </div>
+        </div>
+      </div>
+      <div class="curriculum-item reveal">
+        <div class="curriculum-step">04</div>
+        <div class="curriculum-content">
+          <h3>수공(收功) & 마무리</h3>
+          <p>순환된 기를 다시 하단전으로 거두어 안착시킵니다. 천천히 몸을 움직이며 일상 의식으로 돌아오고, 수련 소감을 나눕니다.</p>
+          <div class="curriculum-meta">
+            <span>⏱ 약 10분</span>
+            <span>📍 기 안착 · 이완</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">자주 묻는 질문</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <button class="faq-question">기를 정말 느낄 수 있나요?</button>
+        <div class="faq-answer">
+          <p>대부분의 수련생이 첫 수업에서부터 손바닥의 열감이나 미세한 진동감을 체험합니다. 이는 혈류 변화와 신경 반응으로 설명될 수 있는 실제 신체 현상이며, 수련이 깊어질수록 감각이 더 분명해집니다.</p>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-question">단전호흡을 먼저 배워야 하나요?</button>
+        <div class="faq-answer">
+          <p>기 수련은 단전호흡을 기반으로 하므로, 기초 단전호흡반을 1~2개월 수강한 후 참여하시는 것을 권장합니다. 호흡의 기본이 잡혀야 기의 감각을 온전히 체험할 수 있습니다.</p>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-question">기 수련 중 불편한 반응이 올 수 있나요?</button>
+        <div class="faq-answer">
+          <p>수련 초기에 일시적 열감, 근육의 미세한 떨림, 감정의 동요 등이 나타날 수 있습니다. 이는 기혈이 소통되며 나타나는 자연스러운 과정(명현반응)이며, 강사가 개인별 상태를 확인하며 안전하게 안내합니다.</p>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-question">종교와 관련이 있나요?</button>
+        <div class="faq-answer">
+          <p>국선도 기 수련은 특정 종교와 무관한 심신 단련법입니다. 호흡과 의념을 통한 건강 수련이 핵심이며, 종교적 신앙이나 믿음을 요구하지 않습니다. 누구나 자신의 신앙과 관계없이 참여할 수 있습니다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div style="padding: 0 3rem;">
+  <div class="cta-banner reveal">
+    <h2>기 수련 첫 수업,<br>무료로 체험하세요</h2>
+    <p>매주 토요일 오전 9시, 심화 기 수련반이 진행됩니다.</p>
+    <a href="index.html#contact" class="btn-white">무료 체험 신청 →</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <a href="index.html" class="footer-logo">고요<span>.</span></a>
+  <div class="footer-copy">© 2026 고요. All rights reserved.</div>
+</footer>
+
+<script>
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); });
+
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+reveals.forEach(el => observer.observe(el));
+
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  });
+});
+</script>
+
+</body>
+</html>
