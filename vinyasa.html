@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>빈야사 요가 — 고요</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;500;700;900&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1612;
+  --paper: #f5f0e8;
+  --warm: #c9a96e;
+  --sage: #7a8b6f;
+  --rust: #b5654a;
+  --mist: #d4cfc5;
+  --cloud: #ebe6dc;
+  --deep: #2c2520;
+  --gold-glow: rgba(201, 169, 110, 0.15);
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  overflow-x: hidden;
+  line-height: 1.7;
+}
+
+/* ── NAV ── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.2rem 3rem;
+  background: rgba(245, 240, 232, 0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--mist);
+}
+.nav.scrolled { padding: 0.8rem 3rem; box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
+.nav-logo {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 900; font-size: 1.5rem;
+  letter-spacing: -0.02em; color: var(--ink);
+  text-decoration: none;
+}
+.nav-logo span { color: var(--warm); }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  text-decoration: none; color: var(--ink);
+  font-weight: 400; font-size: 0.92rem;
+  position: relative; transition: color 0.3s;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; left: 0;
+  width: 0; height: 2px; background: var(--warm);
+  transition: width 0.3s;
+}
+.nav-links a:hover { color: var(--warm); }
+.nav-links a:hover::after { width: 100%; }
+.nav-cta {
+  padding: 0.55rem 1.6rem; border: 1.5px solid var(--ink);
+  border-radius: 100px; text-decoration: none; color: var(--ink);
+  font-size: 0.88rem; font-weight: 500; transition: all 0.3s;
+}
+.nav-cta:hover { background: var(--ink); color: var(--paper); }
+
+/* ── PAGE HERO ── */
+.page-hero {
+  padding: 10rem 3rem 5rem;
+  background: linear-gradient(160deg, var(--paper) 0%, var(--cloud) 50%, #e8dfd1 100%);
+  position: relative; overflow: hidden;
+}
+.page-hero::before {
+  content: ''; position: absolute; top: -80px; right: -60px;
+  width: 500px; height: 500px; border-radius: 50%;
+  background: var(--rust); opacity: 0.06;
+}
+.page-hero::after {
+  content: ''; position: absolute; bottom: -120px; left: -100px;
+  width: 400px; height: 400px; border-radius: 50%;
+  background: var(--warm); opacity: 0.05;
+}
+.breadcrumb {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-size: 0.85rem; color: #999; margin-bottom: 2rem;
+}
+.breadcrumb a { color: var(--warm); text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.page-hero h1 {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 900; font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 1.2; letter-spacing: -0.02em;
+  margin-bottom: 1.2rem;
+}
+.page-hero h1 em {
+  font-style: normal;
+  background: linear-gradient(135deg, var(--rust), var(--warm));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.page-hero-desc {
+  font-size: 1.1rem; color: #6b6157; max-width: 600px;
+  font-weight: 300; line-height: 1.9;
+}
+
+/* ── CONTENT SECTIONS ── */
+section { padding: 5rem 3rem; }
+.container { max-width: 1100px; margin: 0 auto; }
+.section-label {
+  display: inline-block; font-size: 0.78rem;
+  font-weight: 500; letter-spacing: 0.2em;
+  color: var(--warm); margin-bottom: 1rem;
+}
+.section-title {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 700; font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  line-height: 1.3; margin-bottom: 1.2rem;
+}
+
+/* ── INTRO GRID ── */
+.intro-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 4rem; align-items: center;
+}
+.intro-text p {
+  font-size: 1rem; color: #6b6157; line-height: 2;
+  margin-bottom: 1.2rem; font-weight: 300;
+}
+.intro-visual {
+  background: linear-gradient(135deg, #e8dfd1, var(--mist));
+  border-radius: 24px; height: 400px;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.intro-visual-icon {
+  font-size: 8rem; opacity: 0.12;
+  font-family: 'Noto Serif KR', serif;
+}
+.intro-visual-label {
+  position: absolute; bottom: 2rem; left: 2rem;
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.2rem; font-weight: 700; color: var(--ink);
+  opacity: 0.35;
+}
+
+/* ── BENEFITS ── */
+.benefits-section { background: var(--deep); color: var(--paper); }
+.benefits-section .section-desc { color: #a89f94; margin-bottom: 3rem; }
+.benefits-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+}
+.benefit-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px; padding: 2.5rem 2rem;
+  transition: all 0.4s;
+}
+.benefit-card:hover {
+  background: rgba(255,255,255,0.08);
+  transform: translateY(-4px);
+}
+.benefit-num {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 2.5rem; font-weight: 900;
+  color: var(--rust); opacity: 0.35;
+  margin-bottom: 1rem; line-height: 1;
+}
+.benefit-card h3 {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.2rem; font-weight: 700;
+  margin-bottom: 0.8rem;
+}
+.benefit-card p {
+  font-size: 0.92rem; color: #a89f94; line-height: 1.8;
+}
+
+/* ── FLOW SEQUENCE ── */
+.flow-section { background: var(--cloud); }
+.flow-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+.flow-step {
+  background: white; border-radius: 16px;
+  padding: 2rem 1.5rem; text-align: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+  transition: all 0.4s; position: relative;
+}
+.flow-step:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
+.flow-step::after {
+  content: '→'; position: absolute; right: -1.1rem; top: 50%;
+  transform: translateY(-50%); font-size: 1.2rem; color: var(--mist);
+}
+.flow-step:last-child::after { display: none; }
+.flow-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--gold-glow); color: var(--warm);
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 700; font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+.flow-step h4 {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1rem; font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+.flow-step p {
+  font-size: 0.85rem; color: #999; line-height: 1.6;
+}
+
+/* ── CURRICULUM ── */
+.curriculum-list { max-width: 800px; }
+.curriculum-item {
+  display: flex; gap: 2rem; align-items: flex-start;
+  padding: 2rem 0;
+  border-bottom: 1px solid var(--cloud);
+}
+.curriculum-item:last-child { border-bottom: none; }
+.curriculum-step {
+  flex-shrink: 0; width: 56px; height: 56px;
+  border-radius: 16px; background: rgba(181,101,74,0.1);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.2rem; font-weight: 700; color: var(--rust);
+}
+.curriculum-content h3 {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.15rem; font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.curriculum-content p {
+  font-size: 0.95rem; color: #7a7168; line-height: 1.8;
+}
+.curriculum-meta {
+  display: flex; gap: 1.5rem; margin-top: 0.6rem;
+  font-size: 0.82rem; color: #aaa;
+}
+
+/* ── COMPARISON TABLE ── */
+.compare-table {
+  width: 100%; border-collapse: collapse;
+  margin-top: 2rem; max-width: 800px;
+}
+.compare-table th {
+  text-align: left; padding: 1rem 1.5rem;
+  font-weight: 500; font-size: 0.85rem;
+  color: #999; letter-spacing: 0.08em;
+  border-bottom: 2px solid var(--mist);
+}
+.compare-table td {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--cloud);
+  font-size: 0.95rem;
+}
+.compare-table tbody tr:hover { background: var(--cloud); }
+.compare-highlight {
+  background: var(--gold-glow); font-weight: 500;
+}
+
+/* ── FAQ ── */
+.faq-list { max-width: 750px; }
+.faq-item { border-bottom: 1px solid var(--cloud); padding: 1.5rem 0; }
+.faq-question {
+  display: flex; justify-content: space-between; align-items: center;
+  cursor: pointer; font-weight: 500; font-size: 1rem;
+  background: none; border: none; width: 100%;
+  text-align: left; color: var(--ink); font-family: inherit; padding: 0;
+}
+.faq-question::after {
+  content: '+'; font-size: 1.4rem; color: var(--warm);
+  transition: transform 0.3s; flex-shrink: 0; margin-left: 1rem;
+}
+.faq-item.open .faq-question::after { transform: rotate(45deg); }
+.faq-answer {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s;
+}
+.faq-item.open .faq-answer { max-height: 300px; padding-top: 1rem; }
+.faq-answer p {
+  font-size: 0.95rem; color: #7a7168; line-height: 1.9; font-weight: 300;
+}
+
+/* ── CTA BANNER ── */
+.cta-banner {
+  background: linear-gradient(135deg, var(--rust), var(--warm));
+  color: white; text-align: center;
+  padding: 5rem 3rem; border-radius: 24px;
+  max-width: 1100px; margin: 0 auto 5rem;
+  position: relative; overflow: hidden;
+}
+.cta-banner::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(circle at 70% 50%, rgba(255,255,255,0.12), transparent 60%);
+}
+.cta-banner h2 {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 2rem; font-weight: 700;
+  margin-bottom: 1rem; position: relative;
+}
+.cta-banner p {
+  font-size: 1rem; opacity: 0.85; margin-bottom: 2rem;
+  position: relative;
+}
+.btn-white {
+  display: inline-block; padding: 0.9rem 2.4rem;
+  background: white; color: var(--ink);
+  border-radius: 100px; font-size: 0.95rem;
+  font-weight: 500; text-decoration: none;
+  transition: all 0.3s; position: relative;
+}
+.btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+
+/* ── FOOTER ── */
+footer {
+  padding: 3rem 3rem 2rem;
+  border-top: 1px solid var(--mist);
+  display: flex; justify-content: space-between; align-items: center;
+  max-width: 1100px; margin: 0 auto;
+}
+.footer-logo {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 900; font-size: 1.2rem;
+  text-decoration: none; color: var(--ink);
+}
+.footer-logo span { color: var(--warm); }
+.footer-copy { font-size: 0.82rem; color: #aaa; }
+
+/* ── SCROLL ANIM ── */
+.reveal {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.8s, transform 0.8s;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .nav-links, .nav-cta { display: none; }
+  .intro-grid { grid-template-columns: 1fr; }
+  .benefits-grid { grid-template-columns: 1fr; }
+  .flow-grid { grid-template-columns: repeat(2, 1fr); }
+  .flow-step::after { display: none; }
+  section { padding: 4rem 1.5rem; }
+  .page-hero { padding: 8rem 1.5rem 4rem; }
+  .nav { padding: 1rem 1.5rem; }
+  footer { flex-direction: column; gap: 1rem; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-logo">고요<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">소개</a></li>
+    <li><a href="index.html#programs">프로그램</a></li>
+    <li><a href="index.html#schedule">일정</a></li>
+    <li><a href="index.html#reviews">후기</a></li>
+    <li><a href="index.html#contact">문의</a></li>
+  </ul>
+  <a href="index.html#contact" class="nav-cta">체험 신청</a>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="breadcrumb">
+    <a href="index.html">홈</a>
+    <span>›</span>
+    <a href="index.html#programs">프로그램</a>
+    <span>›</span>
+    <span>빈야사 요가</span>
+  </div>
+  <h1><em>빈야사 요가</em><br>Vinyasa Yoga</h1>
+  <p class="page-hero-desc">
+    호흡과 움직임이 하나로 연결되는 역동적인 플로우.
+    한 동작에서 다음 동작으로 물 흐르듯 이어지며
+    몸과 마음에 깊은 집중과 활력을 동시에 선사합니다.
+  </p>
+</section>
+
+<!-- INTRO -->
+<section>
+  <div class="container">
+    <div class="intro-grid reveal">
+      <div class="intro-text">
+        <div class="section-label">WHAT IS VINYASA YOGA</div>
+        <h2 class="section-title">빈야사 요가란<br>무엇인가요?</h2>
+        <p>
+          빈야사(Vinyasa)는 산스크리트어로 '특별한 방식으로 놓다(Vi-nyasa)'라는 뜻입니다.
+          호흡의 리듬에 맞춰 자세를 연결하는 것이 핵심이며,
+          마치 움직이는 명상(Moving Meditation)과 같습니다.
+        </p>
+        <p>
+          하타요가가 각 자세를 독립적으로 유지하는 데 집중한다면,
+          빈야사는 동작과 동작 사이의 '전환' 자체를 수련으로 봅니다.
+          들숨에 열고, 날숨에 접고 — 호흡이 곧 움직임의 지휘자가 됩니다.
+        </p>
+        <p>
+          우리 수업에서는 매 시간 다른 시퀀스를 구성하여
+          지루하지 않으면서도 체계적인 전신 운동 효과를 제공합니다.
+          음악과 함께 흐르는 빈야사의 역동적 에너지를 경험해 보세요.
+        </p>
+      </div>
+      <div class="intro-visual">
+        <div class="intro-visual-icon">流</div>
+        <div class="intro-visual-label">Breath in Motion</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FLOW SEQUENCE -->
+<section class="flow-section">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">VINYASA FLOW</div>
+      <h2 class="section-title">기본 플로우 시퀀스</h2>
+    </div>
+    <div class="flow-grid">
+      <div class="flow-step reveal">
+        <div class="flow-num">1</div>
+        <h4>플랭크</h4>
+        <p>들숨, 온 몸을 일직선으로 정렬하며 코어 활성화</p>
+      </div>
+      <div class="flow-step reveal">
+        <div class="flow-num">2</div>
+        <h4>차투랑가</h4>
+        <p>날숨, 팔꿈치를 접어 천천히 내려오며 상체 근력 강화</p>
+      </div>
+      <div class="flow-step reveal">
+        <div class="flow-num">3</div>
+        <h4>업독</h4>
+        <p>들숨, 가슴을 열고 척추를 후굴하며 전면을 스트레칭</p>
+      </div>
+      <div class="flow-step reveal">
+        <div class="flow-num">4</div>
+        <h4>다운독</h4>
+        <p>날숨, 엉덩이를 높이 들어 역삼각형으로 전신 이완</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="benefits-section">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">BENEFITS</div>
+      <h2 class="section-title" style="color:var(--paper);">빈야사 요가의 효과</h2>
+      <p class="section-desc">역동적 플로우가 가져오는 변화</p>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-card reveal">
+        <div class="benefit-num">01</div>
+        <h3>심폐 지구력 향상</h3>
+        <p>쉬지 않고 이어지는 동작이 유산소 운동 효과를 만들어 심폐 기능을 강화하고 전반적인 체력을 끌어올립니다.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-num">02</div>
+        <h3>칼로리 소모</h3>
+        <p>정적인 요가에 비해 상당한 칼로리를 소모합니다. 60분 수업 기준 300~500kcal의 에너지를 사용하게 됩니다.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-num">03</div>
+        <h3>전신 근력 강화</h3>
+        <p>체중을 이용한 다양한 전환 동작이 상체, 코어, 하체 근육을 고르게 발달시켜 균형 잡힌 신체를 만듭니다.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-num">04</div>
+        <h3>집중력 & 마음챙김</h3>
+        <p>호흡과 동작을 끊임없이 동기화하는 과정에서 잡념이 사라지고, 현재 순간에 깊이 몰입하는 능력이 길러집니다.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-num">05</div>
+        <h3>유연성 & 가동범위</h3>
+        <p>워밍업된 상태에서 연속적으로 스트레칭하므로, 정적 스트레칭보다 안전하고 효과적으로 유연성을 높입니다.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-num">06</div>
+        <h3>스트레스 해소</h3>
+        <p>리드미컬한 움직임과 깊은 호흡이 자율신경계를 안정시키고, 운동 후 깊은 이완감과 성취감을 경험합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CURRICULUM -->
+<section>
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">CLASS STRUCTURE</div>
+      <h2 class="section-title">수업 구성</h2>
+    </div>
+    <div class="curriculum-list">
+      <div class="curriculum-item reveal">
+        <div class="curriculum-step">01</div>
+        <div class="curriculum-content">
+          <h3>센터링 & 호흡 연결</h3>
+          <p>눈을 감고 호흡을 고르며 오늘의 인텐션(의도)을 설정합니다. 우짜이 호흡법으로 수련 전체를 관통할 호흡의 리듬을 만듭니다.</p>
+          <div class="curriculum-meta">
+            <span>⏱ 약 5분</span>
+            <span>📍 좌식 호흡</span>
+          </div>
+        </div>
+      </div>
+      <div class="curriculum-item reveal">
+        <div class="curriculum-step">02</div>
+        <div class="curriculum-content">
+          <h3>워밍업 플로우</h3>
+          <p>고양이-소 자세, 부드러운 트위스트 등으로 관절과 척추를 깨운 뒤, 태양경배 A·B를 반복하며 체온과 심박수를 올립니다.</p>
+          <div class="curriculum-meta">
+            <span>⏱ 약 10분</span>
+            <span>📍 점진적 강도 상승</span>
+          </div>
+        </div>
+      </div>
+      <div class="curriculum-item reveal">
+        <div class="curriculum-step">03</div>
+        <div class="curriculum-content">
+          <h3>메인 플로우 시퀀스</h3>
+          <p>매 수업마다 다르게 구성되는 창의적 시퀀스. 선 자세, 균형 자세, 후굴, 역전 자세 등을 호흡에 맞춰 유기적으로 연결합니다.</p>
+          <div class="curriculum-meta">
+            <span>⏱ 약 30분</span>
+            <span>📍 역동적 전신 플로우</span>
+          </div>
+        </div>
+      </div>
+      <div class="curriculum-item reveal">
+        <div class="curriculum-step">04</div>
+        <div class="curriculum-content">
+          <h3>쿨다운 & 샤바아사나</h3>
+          <p>바닥 스트레칭으로 근육의 긴장을 풀고, 5~7분간의 샤바아사나로 수련의 효과를 온몸에 흡수시킵니다.</p>
+          <div class="curriculum-meta">
+            <span>⏱ 약 15분</span>
+            <span>📍 이완 · 회복</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON -->
+<section style="background: var(--cloud);">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">COMPARISON</div>
+      <h2 class="section-title">하타 vs 빈야사, 어떻게 다를까?</h2>
+    </div>
+    <table class="compare-table reveal">
+      <thead>
+        <tr>
+          <th>항목</th>
+          <th>하타요가</th>
+          <th class="compare-highlight">빈야사 요가</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>속도</td>
+          <td>느리고 정적</td>
+          <td class="compare-highlight">빠르고 역동적</td>
+        </tr>
+        <tr>
+          <td>자세 유지</td>
+          <td>개별 자세를 오래 유지</td>
+          <td class="compare-highlight">호흡마다 동작 전환</td>
+        </tr>
+        <tr>
+          <td>시퀀스</td>
+          <td>정해진 구성</td>
+          <td class="compare-highlight">매 수업 다른 구성</td>
+        </tr>
+        <tr>
+          <td>운동 강도</td>
+          <td>중·저강도</td>
+          <td class="compare-highlight">중·고강도</td>
+        </tr>
+        <tr>
+          <td>추천 대상</td>
+          <td>완전 초보, 재활</td>
+          <td class="compare-highlight">기초 자세를 아는 분</td>
+        </tr>
+        <tr>
+          <td>핵심 효과</td>
+          <td>유연성, 안정감</td>
+          <td class="compare-highlight">심폐력, 전신 근력</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">자주 묻는 질문</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <button class="faq-question">요가 경험이 전혀 없어도 빈야사를 할 수 있나요?</button>
+        <div class="faq-answer">
+          <p>기본적인 자세(다운독, 플랭크, 전사 자세 등)를 익힌 뒤 참여하시면 좋습니다. 하타요가 기초반을 1~2개월 수강한 후 빈야사로 넘어오시는 것을 권장하며, 강사가 레벨에 맞는 변형 동작을 안내해 드립니다.</p>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-question">빈야사 요가는 운동 효과가 충분한가요?</button>
+        <div class="faq-answer">
+          <p>충분합니다. 빈야사는 유산소와 근력 운동의 장점을 모두 갖추고 있습니다. 체중 부하 동작이 많아 근력 강화에 효과적이며, 연속적인 플로우가 심박수를 높여 칼로리 소모도 상당합니다.</p>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-question">수업 전에 식사를 해도 되나요?</button>
+        <div class="faq-answer">
+          <p>수업 2시간 전까지 가벼운 식사를 마치시는 것이 좋습니다. 빈야사는 움직임이 많고 복부 압박 동작이 포함되므로, 공복이나 가볍게 과일 정도만 드신 상태가 가장 쾌적합니다.</p>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-question">매 수업 시퀀스가 다르면 혼란스럽지 않나요?</button>
+        <div class="faq-answer">
+          <p>강사가 동작을 실시간으로 안내하므로 시퀀스를 외울 필요가 없습니다. 오히려 매번 새로운 흐름을 따라가는 것이 빈야사의 재미이자, 현재 순간에 집중하게 만드는 핵심 요소입니다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div style="padding: 0 3rem;">
+  <div class="cta-banner reveal">
+    <h2>빈야사 요가 첫 수업,<br>무료로 체험하세요</h2>
+    <p>매주 화 · 목 저녁 7시, 직장인을 위한 빈야사 클래스가 진행됩니다.</p>
+    <a href="index.html#contact" class="btn-white">무료 체험 신청 →</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <a href="index.html" class="footer-logo">고요<span>.</span></a>
+  <div class="footer-copy">© 2026 고요. All rights reserved.</div>
+</footer>
+
+<script>
+// Nav scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+reveals.forEach(el => observer.observe(el));
+
+// FAQ toggle
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  });
+});
+</script>
+
+</body>
+</html>
