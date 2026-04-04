@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>소리명상 — 트래블러 명상</title>
+<title>트레블러명상 — 요가 · 국선도 · 명상</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;500;700;900&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -13,20 +13,19 @@
   --warm: #c9a96e;
   --sage: #7a8b6f;
   --rust: #b5654a;
-  --rust-deep: #8b4a35;
   --mist: #d4cfc5;
   --cloud: #ebe6dc;
   --deep: #2c2520;
-  --rust-glow: rgba(181, 101, 74, 0.12);
-  --bronze: #a8855c;
-  --bronze-glow: rgba(168, 133, 92, 0.12);
+  --gold-glow: rgba(201, 169, 110, 0.15);
 }
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
   font-family: 'Noto Sans KR', sans-serif;
-  background: var(--paper); color: var(--ink);
-  overflow-x: hidden; line-height: 1.7;
+  background: var(--paper);
+  color: var(--ink);
+  overflow-x: hidden;
+  line-height: 1.7;
 }
 .nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -35,12 +34,14 @@ body {
   background: rgba(245, 240, 232, 0.85);
   backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--mist);
+  transition: all 0.4s;
 }
 .nav.scrolled { padding: 0.8rem 3rem; box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
 .nav-logo {
   font-family: 'Noto Serif KR', serif;
   font-weight: 900; font-size: 1.5rem;
-  letter-spacing: -0.02em; color: var(--ink); text-decoration: none;
+  letter-spacing: -0.02em; color: var(--ink);
+  text-decoration: none;
 }
 .nav-logo span { color: var(--warm); }
 .nav-links { display: flex; gap: 2.5rem; list-style: none; }
@@ -51,7 +52,8 @@ body {
 }
 .nav-links a::after {
   content: ''; position: absolute; bottom: -4px; left: 0;
-  width: 0; height: 2px; background: var(--warm); transition: width 0.3s;
+  width: 0; height: 2px; background: var(--warm);
+  transition: width 0.3s;
 }
 .nav-links a:hover { color: var(--warm); }
 .nav-links a:hover::after { width: 100%; }
@@ -61,566 +63,501 @@ body {
   font-size: 0.88rem; font-weight: 500; transition: all 0.3s;
 }
 .nav-cta:hover { background: var(--ink); color: var(--paper); }
-
-.page-hero {
-  padding: 10rem 3rem 5rem;
-  background: linear-gradient(160deg, var(--paper) 0%, #e8e0d6 50%, #e2dbd2 100%);
+.hero {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
   position: relative; overflow: hidden;
+  background: linear-gradient(160deg, var(--paper) 0%, var(--cloud) 50%, #e8dfd1 100%);
 }
-.page-hero::before {
-  content: ''; position: absolute; top: -100px; right: -80px;
-  width: 500px; height: 500px; border-radius: 50%;
-  background: var(--bronze); opacity: 0.06;
+.hero-bg-circle {
+  position: absolute; border-radius: 50%; opacity: 0.08;
+  animation: floatCircle 20s ease-in-out infinite;
 }
-.page-hero::after {
-  content: ''; position: absolute; bottom: -120px; left: -80px;
-  width: 380px; height: 380px; border-radius: 50%;
-  background: var(--rust); opacity: 0.05;
+.hero-bg-circle:nth-child(1) {
+  width: 600px; height: 600px; top: -150px; right: -100px;
+  background: var(--warm);
 }
-.breadcrumb {
-  display: flex; align-items: center; gap: 0.5rem;
-  font-size: 0.85rem; color: #999; margin-bottom: 2rem;
+.hero-bg-circle:nth-child(2) {
+  width: 400px; height: 400px; bottom: -100px; left: -80px;
+  background: var(--sage); animation-delay: -7s;
 }
-.breadcrumb a { color: var(--rust); text-decoration: none; }
-.breadcrumb a:hover { text-decoration: underline; }
-.page-hero h1 {
+.hero-bg-circle:nth-child(3) {
+  width: 300px; height: 300px; top: 40%; left: 60%;
+  background: var(--rust); animation-delay: -14s;
+}
+@keyframes floatCircle {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -20px) scale(1.05); }
+  66% { transform: translate(-20px, 15px) scale(0.95); }
+}
+.hero-content {
+  text-align: center; padding: 2rem;
+  position: relative; z-index: 2;
+  animation: fadeUp 1.2s ease-out;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-badge {
+  display: inline-block; padding: 0.4rem 1.4rem;
+  border: 1px solid var(--warm); border-radius: 100px;
+  font-size: 0.82rem; font-weight: 500;
+  color: var(--warm); letter-spacing: 0.15em;
+  margin-bottom: 2rem; animation: fadeUp 1.2s ease-out 0.2s both;
+}
+.hero h1 {
   font-family: 'Noto Serif KR', serif;
-  font-weight: 900; font-size: clamp(2.5rem, 5vw, 4rem);
-  line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 1.2rem;
+  font-weight: 900; font-size: clamp(3rem, 7vw, 6rem);
+  line-height: 1.15; letter-spacing: -0.03em;
+  margin-bottom: 1.5rem; animation: fadeUp 1.2s ease-out 0.4s both;
 }
-.page-hero h1 em {
+.hero h1 em {
   font-style: normal;
-  background: linear-gradient(135deg, var(--rust), var(--bronze));
+  background: linear-gradient(135deg, var(--warm), var(--rust));
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-.page-hero-desc {
-  font-size: 1.1rem; color: #6b6157; max-width: 600px;
+.hero p {
+  font-size: 1.15rem; color: #6b6157;
+  max-width: 520px; margin: 0 auto 2.5rem;
   font-weight: 300; line-height: 1.9;
+  animation: fadeUp 1.2s ease-out 0.6s both;
 }
-
-section { padding: 5rem 3rem; }
-.container { max-width: 1100px; margin: 0 auto; }
+.hero-buttons {
+  display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+  animation: fadeUp 1.2s ease-out 0.8s both;
+}
+.btn-primary {
+  padding: 0.9rem 2.4rem; background: var(--ink); color: var(--paper);
+  border: none; border-radius: 100px; font-size: 0.95rem;
+  font-weight: 500; cursor: pointer; text-decoration: none; transition: all 0.3s;
+}
+.btn-primary:hover { background: var(--warm); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(201,169,110,0.3); }
+.btn-secondary {
+  padding: 0.9rem 2.4rem; background: transparent; color: var(--ink);
+  border: 1.5px solid var(--mist); border-radius: 100px;
+  font-size: 0.95rem; font-weight: 500; cursor: pointer; text-decoration: none; transition: all 0.3s;
+}
+.btn-secondary:hover { border-color: var(--ink); }
+.hero-scroll {
+  position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  color: var(--mist); font-size: 0.75rem; letter-spacing: 0.1em;
+  animation: bounce 2s ease-in-out infinite;
+}
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+section { padding: 7rem 3rem; }
 .section-label {
   display: inline-block; font-size: 0.78rem;
   font-weight: 500; letter-spacing: 0.2em;
-  color: var(--rust); margin-bottom: 1rem;
+  color: var(--warm); text-transform: uppercase; margin-bottom: 1rem;
 }
 .section-title {
   font-family: 'Noto Serif KR', serif;
-  font-weight: 700; font-size: clamp(1.8rem, 3.5vw, 2.5rem);
-  line-height: 1.3; margin-bottom: 1.2rem;
+  font-weight: 700; font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.3; letter-spacing: -0.02em; margin-bottom: 1.2rem;
 }
-
-.intro-grid {
+.section-desc {
+  font-size: 1.05rem; color: #7a7168;
+  max-width: 560px; font-weight: 300; line-height: 1.9;
+}
+.about {
   display: grid; grid-template-columns: 1fr 1fr;
-  gap: 4rem; align-items: center;
+  gap: 5rem; align-items: center; max-width: 1200px; margin: 0 auto;
 }
-.intro-text p {
-  font-size: 1rem; color: #6b6157; line-height: 2;
-  margin-bottom: 1.2rem; font-weight: 300;
+.about-visual { position: relative; height: 500px; }
+.about-card {
+  position: absolute; border-radius: 16px;
+  overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.08); transition: transform 0.5s;
 }
-.intro-visual {
-  background: linear-gradient(135deg, #d9cfc4, #b59f8a);
-  border-radius: 24px; height: 400px;
+.about-card:hover { transform: translateY(-8px) rotate(0deg) !important; }
+.about-card:nth-child(1) {
+  width: 280px; height: 340px; top: 0; left: 20px; transform: rotate(-3deg);
+  background: linear-gradient(135deg, #d4cfc5, #c9a96e);
   display: flex; align-items: center; justify-content: center;
-  position: relative; overflow: hidden;
 }
-.intro-visual-icon {
-  font-size: 8rem; opacity: 0.15;
-  font-family: 'Noto Serif KR', serif; color: white;
+.about-card:nth-child(2) {
+  width: 240px; height: 300px; top: 80px; right: 0; transform: rotate(2deg);
+  background: linear-gradient(135deg, #7a8b6f, #5a6b4f);
+  display: flex; align-items: center; justify-content: center;
 }
-.intro-visual-label {
-  position: absolute; bottom: 2rem; left: 2rem;
+.about-card:nth-child(3) {
+  width: 200px; height: 200px; bottom: 0; left: 60px; transform: rotate(-1deg);
+  background: linear-gradient(135deg, #b5654a, #8b4a35);
+  display: flex; align-items: center; justify-content: center;
+}
+.card-icon { font-size: 4rem; opacity: 0.6; color: white; font-family: 'Noto Serif KR', serif; }
+.about-stats { display: flex; gap: 2.5rem; margin-top: 2.5rem; }
+.stat-item { text-align: left; }
+.stat-num {
   font-family: 'Noto Serif KR', serif;
-  font-size: 1.15rem; font-weight: 700; color: white; opacity: 0.5;
+  font-size: 2.2rem; font-weight: 700; color: var(--warm); line-height: 1;
 }
-
-/* ── INSTRUMENTS ── */
-.instruments-section { background: var(--deep); color: var(--paper); }
-.instruments-section .section-label { color: var(--bronze); }
-.inst-grid {
+.stat-label { font-size: 0.85rem; color: #999; margin-top: 0.3rem; }
+.programs { background: var(--deep); color: var(--paper); }
+.programs .section-label { color: var(--warm); }
+.programs .section-desc { color: #a89f94; }
+.programs-header { text-align: center; max-width: 600px; margin: 0 auto 4rem; }
+.programs-grid {
   display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 2rem; margin-top: 3rem;
+  gap: 2rem; max-width: 1200px; margin: 0 auto;
 }
-.inst-card {
+.program-card {
   background: rgba(255,255,255,0.04);
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: 20px; padding: 2.5rem 2rem;
-  text-align: center; transition: all 0.4s;
-  position: relative; overflow: hidden;
+  transition: all 0.4s; position: relative; overflow: hidden;
 }
-.inst-card:hover { background: rgba(255,255,255,0.08); transform: translateY(-4px); }
-.inst-card::before {
+.program-card::before {
   content: ''; position: absolute; top: 0; left: 0; right: 0;
-  height: 3px; background: var(--bronze);
+  height: 3px; background: var(--warm);
   transform: scaleX(0); transition: transform 0.4s;
 }
-.inst-card:hover::before { transform: scaleX(1); }
-.inst-emoji { font-size: 3rem; margin-bottom: 1rem; }
-.inst-card h3 {
-  font-family: 'Noto Serif KR', serif;
-  font-size: 1.15rem; font-weight: 700; margin-bottom: 0.3rem;
+.program-card:hover { background: rgba(255,255,255,0.08); transform: translateY(-6px); }
+.program-card:hover::before { transform: scaleX(1); }
+.program-icon {
+  width: 60px; height: 60px; border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.8rem; margin-bottom: 1.5rem;
 }
-.inst-card .eng { font-size: 0.82rem; color: var(--bronze); margin-bottom: 0.8rem; }
-.inst-card p { font-size: 0.92rem; color: #a89f94; line-height: 1.8; }
-
-/* ── STYLES ── */
-.styles-section { background: var(--cloud); }
-.styles-grid {
+.program-card:nth-child(1) .program-icon { background: rgba(201,169,110,0.15); }
+.program-card:nth-child(2) .program-icon { background: rgba(122,139,111,0.2); }
+.program-card:nth-child(3) .program-icon { background: rgba(181,101,74,0.2); }
+.program-card h3 {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.35rem; font-weight: 700; margin-bottom: 0.8rem;
+}
+.program-card p { font-size: 0.95rem; color: #a89f94; line-height: 1.8; margin-bottom: 1.5rem; }
+.program-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.program-tag {
+  padding: 0.3rem 0.9rem; border-radius: 100px;
+  font-size: 0.78rem; border: 1px solid rgba(255,255,255,0.12); color: #ccc;
+}
+.program-tag-link {
+  text-decoration: none; cursor: pointer; transition: all 0.3s;
+}
+.program-tag-link:hover {
+  background: var(--warm); color: var(--deep); border-color: var(--warm);
+}
+.schedule { max-width: 1000px; margin: 0 auto; }
+.schedule-header { margin-bottom: 3rem; }
+.schedule-table { width: 100%; border-collapse: collapse; }
+.schedule-table th {
+  text-align: left; padding: 1rem 1.5rem;
+  font-weight: 500; font-size: 0.85rem;
+  color: #999; letter-spacing: 0.1em; border-bottom: 2px solid var(--mist);
+}
+.schedule-table td { padding: 1.2rem 1.5rem; border-bottom: 1px solid var(--cloud); font-size: 0.95rem; }
+.schedule-table tr { transition: background 0.3s; }
+.schedule-table tbody tr:hover { background: var(--cloud); }
+.schedule-tag {
+  display: inline-block; padding: 0.25rem 0.8rem;
+  border-radius: 100px; font-size: 0.8rem; font-weight: 500;
+}
+.tag-yoga { background: var(--gold-glow); color: var(--warm); }
+.tag-ksd { background: rgba(122,139,111,0.12); color: var(--sage); }
+.tag-med { background: rgba(181,101,74,0.12); color: var(--rust); }
+.testimonials { background: linear-gradient(180deg, var(--cloud) 0%, var(--paper) 100%); }
+.testimonials-header { text-align: center; margin-bottom: 4rem; }
+.testimonials-grid {
   display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 2rem; margin-top: 2.5rem;
+  gap: 2rem; max-width: 1100px; margin: 0 auto;
 }
-.style-card {
+.testimonial-card {
   background: white; border-radius: 20px;
-  padding: 2.5rem 2rem;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.04); transition: all 0.4s;
+  padding: 2.5rem 2rem; position: relative;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.04); transition: transform 0.4s;
 }
-.style-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
-.style-num {
-  font-family: 'Noto Serif KR', serif;
-  font-size: 2.5rem; font-weight: 900;
-  color: var(--bronze); opacity: 0.3;
-  margin-bottom: 0.8rem; line-height: 1;
+.testimonial-card:hover { transform: translateY(-4px); }
+.testimonial-quote {
+  font-size: 3rem; color: var(--warm); opacity: 0.3;
+  font-family: Georgia, serif; line-height: 1; margin-bottom: 1rem;
 }
-.style-card h3 {
-  font-family: 'Noto Serif KR', serif;
-  font-size: 1.1rem; font-weight: 700; margin-bottom: 0.3rem;
-}
-.style-card .eng { font-size: 0.82rem; color: var(--rust); margin-bottom: 0.6rem; }
-.style-card p { font-size: 0.92rem; color: #7a7168; line-height: 1.8; }
-
-/* ── BENEFITS ── */
-.benefits-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
-  margin-top: 2.5rem;
-}
-.benefit-card {
-  background: white; border-radius: 20px;
-  padding: 2.5rem 2rem;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.04); transition: all 0.4s;
-}
-.benefit-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
-.benefit-icon {
-  width: 56px; height: 56px; border-radius: 16px;
-  background: var(--rust-glow);
+.testimonial-card p { font-size: 0.95rem; color: #6b6157; line-height: 1.9; margin-bottom: 1.5rem; font-weight: 300; }
+.testimonial-author { display: flex; align-items: center; gap: 0.8rem; }
+.testimonial-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  font-size: 1.6rem; margin-bottom: 1.2rem;
+  font-size: 0.85rem; font-weight: 700; color: white;
 }
-.benefit-card h3 {
-  font-family: 'Noto Serif KR', serif;
-  font-size: 1.1rem; font-weight: 700; margin-bottom: 0.6rem;
-}
-.benefit-card p { font-size: 0.92rem; color: #7a7168; line-height: 1.8; }
-
-/* ── CURRICULUM ── */
-.curriculum-list { max-width: 800px; }
-.curriculum-item {
-  display: flex; gap: 2rem; align-items: flex-start;
-  padding: 2rem 0; border-bottom: 1px solid var(--cloud);
-}
-.curriculum-item:last-child { border-bottom: none; }
-.curriculum-step {
-  flex-shrink: 0; width: 56px; height: 56px;
-  border-radius: 16px; background: var(--rust-glow);
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'Noto Serif KR', serif;
-  font-size: 1.2rem; font-weight: 700; color: var(--rust);
-}
-.curriculum-content h3 {
-  font-family: 'Noto Serif KR', serif;
-  font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem;
-}
-.curriculum-content p { font-size: 0.95rem; color: #7a7168; line-height: 1.8; }
-.curriculum-meta {
-  display: flex; gap: 1.5rem; margin-top: 0.6rem;
-  font-size: 0.82rem; color: #aaa;
-}
-
-/* ── FAQ ── */
-.faq-list { max-width: 750px; }
-.faq-item { border-bottom: 1px solid var(--cloud); padding: 1.5rem 0; }
-.faq-question {
-  display: flex; justify-content: space-between; align-items: center;
-  cursor: pointer; font-weight: 500; font-size: 1rem;
-  background: none; border: none; width: 100%;
-  text-align: left; color: var(--ink); font-family: inherit; padding: 0;
-}
-.faq-question::after {
-  content: '+'; font-size: 1.4rem; color: var(--rust);
-  transition: transform 0.3s; flex-shrink: 0; margin-left: 1rem;
-}
-.faq-item.open .faq-question::after { transform: rotate(45deg); }
-.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s; }
-.faq-item.open .faq-answer { max-height: 300px; padding-top: 1rem; }
-.faq-answer p { font-size: 0.95rem; color: #7a7168; line-height: 1.9; font-weight: 300; }
-
+.testimonial-name { font-weight: 500; font-size: 0.9rem; }
+.testimonial-role { font-size: 0.8rem; color: #999; }
 .cta-banner {
-  background: linear-gradient(135deg, var(--rust), var(--rust-deep));
-  color: white; text-align: center;
-  padding: 5rem 3rem; border-radius: 24px;
-  max-width: 1100px; margin: 0 auto 5rem;
+  background: var(--deep); color: var(--paper);
+  text-align: center; padding: 6rem 3rem;
   position: relative; overflow: hidden;
 }
 .cta-banner::before {
   content: ''; position: absolute; inset: 0;
-  background: radial-gradient(circle at 70% 50%, rgba(168,133,92,0.15), transparent 60%);
+  background: radial-gradient(ellipse at center, rgba(201,169,110,0.1) 0%, transparent 70%);
 }
-.cta-banner h2 {
+.cta-banner .section-title { margin-bottom: 1rem; }
+.cta-banner p { color: #a89f94; margin: 0 auto 2.5rem; max-width: 500px; font-weight: 300; }
+footer { padding: 4rem 3rem 2rem; border-top: 1px solid var(--mist); }
+.footer-grid {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 3rem; max-width: 1200px; margin: 0 auto 3rem;
+}
+.footer-brand {
   font-family: 'Noto Serif KR', serif;
-  font-size: 2rem; font-weight: 700; margin-bottom: 1rem; position: relative;
+  font-weight: 900; font-size: 1.3rem; margin-bottom: 1rem;
 }
-.cta-banner p { font-size: 1rem; opacity: 0.85; margin-bottom: 2rem; position: relative; }
-.btn-white {
-  display: inline-block; padding: 0.9rem 2.4rem;
-  background: white; color: var(--ink);
-  border-radius: 100px; font-size: 0.95rem;
-  font-weight: 500; text-decoration: none;
-  transition: all 0.3s; position: relative;
+.footer-brand span { color: var(--warm); }
+.footer-desc { font-size: 0.9rem; color: #999; line-height: 1.8; max-width: 300px; }
+.footer-col h4 {
+  font-size: 0.82rem; font-weight: 500;
+  letter-spacing: 0.15em; color: var(--warm); margin-bottom: 1.2rem;
 }
-.btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
-
-footer {
-  padding: 3rem 3rem 2rem; border-top: 1px solid var(--mist);
-  display: flex; justify-content: space-between; align-items: center;
-  max-width: 1100px; margin: 0 auto;
+.footer-col ul { list-style: none; }
+.footer-col li { margin-bottom: 0.6rem; }
+.footer-col a { text-decoration: none; color: #777; font-size: 0.9rem; transition: color 0.3s; }
+.footer-col a:hover { color: var(--ink); }
+.footer-bottom {
+  text-align: center; padding-top: 2rem;
+  border-top: 1px solid var(--cloud); font-size: 0.82rem; color: #aaa;
 }
-.footer-logo {
-  font-family: 'Noto Serif KR', serif;
-  font-weight: 900; font-size: 1.2rem; text-decoration: none; color: var(--ink);
-}
-.footer-logo span { color: var(--warm); }
-.footer-copy { font-size: 0.82rem; color: #aaa; }
-
+.nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; }
+.nav-toggle span { display: block; width: 22px; height: 2px; background: var(--ink); margin: 5px 0; transition: all 0.3s; }
 .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s, transform 0.8s; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
-
 @media (max-width: 900px) {
   .nav-links, .nav-cta { display: none; }
-  .intro-grid { grid-template-columns: 1fr; }
-  .inst-grid { grid-template-columns: 1fr; }
-  .styles-grid { grid-template-columns: 1fr; }
-  .benefits-grid { grid-template-columns: 1fr; }
-  section { padding: 4rem 1.5rem; }
-  .page-hero { padding: 8rem 1.5rem 4rem; }
+  .nav-toggle { display: block; }
+  .nav.open .nav-links {
+    display: flex; flex-direction: column;
+    position: absolute; top: 100%; left: 0; right: 0;
+    background: rgba(245,240,232,0.97);
+    padding: 2rem 3rem; gap: 1.5rem; border-bottom: 1px solid var(--mist);
+  }
+  .nav.open .nav-cta { display: inline-block; position: absolute; top: 100%; right: 3rem; margin-top: -3.5rem; }
+  .about { grid-template-columns: 1fr; gap: 3rem; }
+  .about-visual { height: 350px; }
+  .programs-grid { grid-template-columns: 1fr; }
+  .testimonials-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  section { padding: 5rem 1.5rem; }
   .nav { padding: 1rem 1.5rem; }
-  footer { flex-direction: column; gap: 1rem; text-align: center; }
+  .schedule-table { font-size: 0.85rem; }
+  .schedule-table th, .schedule-table td { padding: 0.8rem; }
 }
 </style>
 </head>
 <body>
-
 <nav class="nav" id="nav">
-  <a href="index.html" class="nav-logo">트래블러 명상<span>.</span></a>
+  <a href="#" class="nav-logo">트래블러 명상<span>.</span></a>
   <ul class="nav-links">
-    <li><a href="index.html#about">소개</a></li>
-    <li><a href="index.html#programs">프로그램</a></li>
-    <li><a href="index.html#schedule">일정</a></li>
-    <li><a href="index.html#reviews">후기</a></li>
-    <li><a href="index.html#contact">문의</a></li>
+    <li><a href="#about">소개</a></li>
+    <li><a href="#programs">프로그램</a></li>
+    <li><a href="#schedule">일정</a></li>
+    <li><a href="#reviews">후기</a></li>
+    <li><a href="#contact">문의</a></li>
   </ul>
-  <a href="index.html#contact" class="nav-cta">체험 신청</a>
+  <a href="#contact" class="nav-cta">체험 신청</a>
+  <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
-
-<section class="page-hero">
-  <div class="breadcrumb">
-    <a href="index.html">홈</a>
-    <span>›</span>
-    <a href="index.html#programs">프로그램</a>
-    <span>›</span>
-    <span>소리명상</span>
-  </div>
-  <h1><em>소리명상</em><br>Sound Meditation</h1>
-  <p class="page-hero-desc">
-    싱잉볼의 깊은 울림, 자연의 소리, 고요 속의 미세한 진동.
-    소리에 온전히 귀 기울이며 생각의 소음을 내려놓고
-    청각을 통해 깊은 이완과 내면의 고요에 도달합니다.
-  </p>
-</section>
-
-<!-- INTRO -->
-<section>
-  <div class="container">
-    <div class="intro-grid reveal">
-      <div class="intro-text">
-        <div class="section-label">WHAT IS SOUND MEDITATION</div>
-        <h2 class="section-title">소리명상이란<br>무엇인가요?</h2>
-        <p>
-          소리명상은 특정 소리나 음향을 의도적으로 듣는 행위를 통해
-          마음챙김 상태에 이르는 수련법입니다.
-          티벳 싱잉볼, 크리스탈볼, 공(Gong), 자연의 소리 등
-          다양한 음원이 명상의 매개가 됩니다.
-        </p>
-        <p>
-          우리 귀는 늘 열려 있지만, 대부분의 소리를 무의식적으로 흘려보냅니다.
-          소리명상은 이 자동적 필터를 해제하고,
-          소리의 시작과 끝, 음색의 변화, 진동의 퍼짐을
-          있는 그대로 관찰하는 훈련입니다.
-        </p>
-        <p>
-          특별한 기술이 필요 없어 명상 초보자도 쉽게 접근할 수 있으며,
-          '사운드 배스(Sound Bath)'라는 이름으로 전 세계적으로
-          인기를 얻고 있는 현대 웰니스 트렌드이기도 합니다.
-        </p>
-      </div>
-      <div class="intro-visual">
-        <div class="intro-visual-icon">音</div>
-        <div class="intro-visual-label">Listening as Meditation</div>
-      </div>
+<section class="hero" id="home">
+  <div class="hero-bg-circle"></div>
+  <div class="hero-bg-circle"></div>
+  <div class="hero-bg-circle"></div>
+  <div class="hero-content">
+    <div class="hero-badge">YOGA · 국선도 · MEDITATION</div>
+    <h1>몸과 마음의<br><em>고요한 균형</em></h1>
+    <p>요가의 유연함, 국선도의 기운, 명상의 고요함으로<br>일상 속 진정한 나를 만나는 시간</p>
+    <div class="hero-buttons">
+      <a href="#programs" class="btn-primary">프로그램 보기</a>
+      <a href="#about" class="btn-secondary">더 알아보기</a>
     </div>
   </div>
+  <div class="hero-scroll">SCROLL<br>↓</div>
 </section>
-
-<!-- INSTRUMENTS -->
-<section class="instruments-section">
-  <div class="container">
+<section id="about" style="padding-top:8rem; padding-bottom:8rem;">
+  <div class="about">
+    <div class="about-visual reveal">
+      <div class="about-card"><div class="card-icon">靜</div></div>
+      <div class="about-card"><div class="card-icon">氣</div></div>
+      <div class="about-card"><div class="card-icon">和</div></div>
+    </div>
     <div class="reveal">
-      <div class="section-label">INSTRUMENTS</div>
-      <h2 class="section-title" style="color:var(--paper);">수업에서 만나는 소리</h2>
-    </div>
-    <div class="inst-grid">
-      <div class="inst-card reveal">
-        <div class="inst-emoji">🔔</div>
-        <h3>티벳 싱잉볼</h3>
-        <div class="eng">Tibetan Singing Bowl</div>
-        <p>수백 년 전통의 금속 합금 볼. 채로 문지르거나 두드리면 풍부한 배음이 겹겹이 울려 퍼지며 뇌파를 알파·세타 상태로 유도합니다.</p>
-      </div>
-      <div class="inst-card reveal">
-        <div class="inst-emoji">💎</div>
-        <h3>크리스탈 싱잉볼</h3>
-        <div class="eng">Crystal Singing Bowl</div>
-        <p>순수 석영으로 만든 투명한 음색의 볼. 특정 주파수를 정확하게 내어 각 차크라에 대응하는 진동 치유에 활용됩니다.</p>
-      </div>
-      <div class="inst-card reveal">
-        <div class="inst-emoji">🥁</div>
-        <h3>공 & 팅샤</h3>
-        <div class="eng">Gong & Tingsha</div>
-        <p>공의 압도적인 울림은 사고의 흐름을 순간적으로 멈추게 하며, 팅샤의 맑은 종소리는 명상의 시작과 끝을 알립니다.</p>
-      </div>
-      <div class="inst-card reveal">
-        <div class="inst-emoji">🎋</div>
-        <h3>레인스틱 & 오션드럼</h3>
-        <div class="eng">Rain Stick & Ocean Drum</div>
-        <p>빗소리와 파도 소리를 재현하는 악기. 자연의 리듬을 실내로 가져와 깊은 이완과 안정감을 만들어냅니다.</p>
-      </div>
-      <div class="inst-card reveal">
-        <div class="inst-emoji">🌊</div>
-        <h3>자연음</h3>
-        <div class="eng">Nature Sounds</div>
-        <p>새소리, 계곡물, 바람, 빗소리 등 녹음된 자연의 소리를 활용합니다. 도시 생활에서 단절된 자연과의 연결을 회복합니다.</p>
-      </div>
-      <div class="inst-card reveal">
-        <div class="inst-emoji">🎵</div>
-        <h3>앰비언트 음악</h3>
-        <div class="eng">Ambient Music</div>
-        <p>멜로디와 리듬을 최소화한 배경적 음악. 의식을 특정 방향으로 이끌지 않으면서 명상의 깊이를 지지합니다.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- STYLES -->
-<section class="styles-section">
-  <div class="container">
-    <div class="reveal">
-      <div class="section-label">STYLES</div>
-      <h2 class="section-title">세 가지 소리명상</h2>
-    </div>
-    <div class="styles-grid">
-      <div class="style-card reveal">
-        <div class="style-num">01</div>
-        <h3>사운드 배스</h3>
-        <div class="eng">Sound Bath</div>
-        <p>누운 자세에서 싱잉볼과 공의 울림에 온몸을 맡깁니다. 소리의 진동이 몸 구석구석을 씻어내듯 이완시키며, 별도의 노력 없이 깊은 명상 상태에 이릅니다.</p>
-      </div>
-      <div class="style-card reveal">
-        <div class="style-num">02</div>
-        <h3>능동적 경청</h3>
-        <div class="eng">Deep Listening</div>
-        <p>앉은 자세로 주변의 모든 소리에 비판단적으로 귀 기울입니다. 소리가 나타나고 사라지는 과정을 관찰하며 마음챙김 근육을 키웁니다.</p>
-      </div>
-      <div class="style-card reveal">
-        <div class="style-num">03</div>
-        <h3>자연음 명상</h3>
-        <div class="eng">Nature Sound Journey</div>
-        <p>야외에서 또는 자연음 녹음을 들으며 자연의 리듬에 동기화합니다. 새소리, 물소리, 바람소리가 마음을 현재 순간으로 부드럽게 데려옵니다.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- BENEFITS -->
-<section>
-  <div class="container">
-    <div class="reveal">
-      <div class="section-label">BENEFITS</div>
-      <h2 class="section-title">소리명상의 효과</h2>
-    </div>
-    <div class="benefits-grid">
-      <div class="benefit-card reveal">
-        <div class="benefit-icon">🧠</div>
-        <h3>뇌파 안정</h3>
-        <p>싱잉볼의 배음이 뇌파를 베타(각성)에서 알파·세타(이완·명상) 상태로 자연스럽게 전환시킵니다.</p>
-      </div>
-      <div class="benefit-card reveal">
-        <div class="benefit-icon">😌</div>
-        <h3>즉각적 이완</h3>
-        <p>소리에 몸을 맡기기만 하면 되므로 노력 없는 명상이 가능합니다. 명상이 어렵게 느껴지는 분에게 가장 쉬운 입문 경로입니다.</p>
-      </div>
-      <div class="benefit-card reveal">
-        <div class="benefit-icon">💤</div>
-        <h3>깊은 수면 유도</h3>
-        <p>사운드 배스 후 참가자의 대다수가 평소보다 깊고 질 좋은 수면을 경험합니다. 불면에 시달리는 분에게 특히 효과적입니다.</p>
-      </div>
-      <div class="benefit-card reveal">
-        <div class="benefit-icon">🎯</div>
-        <h3>청각 마음챙김</h3>
-        <p>소리를 관찰하는 훈련이 일상에서의 경청 능력을 높여, 대화의 질과 대인관계가 개선됩니다.</p>
-      </div>
-      <div class="benefit-card reveal">
-        <div class="benefit-icon">🌊</div>
-        <h3>감정 정화</h3>
-        <p>깊은 울림이 무의식에 쌓인 감정적 긴장을 표면으로 끌어올리고 부드럽게 해소시킵니다. 수련 후 가벼워짐을 느끼는 분이 많습니다.</p>
-      </div>
-      <div class="benefit-card reveal">
-        <div class="benefit-icon">⚡</div>
-        <h3>에너지 리셋</h3>
-        <p>60분의 사운드 배스가 신체적으로 3~4시간의 깊은 수면에 버금가는 회복 효과를 준다는 체험적 보고가 있습니다.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CURRICULUM -->
-<section style="background: var(--cloud);">
-  <div class="container">
-    <div class="reveal">
-      <div class="section-label">CLASS STRUCTURE</div>
-      <h2 class="section-title">수업 구성</h2>
-    </div>
-    <div class="curriculum-list">
-      <div class="curriculum-item reveal">
-        <div class="curriculum-step">01</div>
-        <div class="curriculum-content">
-          <h3>도착 & 세팅</h3>
-          <p>요가 매트와 담요 위에 편안하게 눕습니다. 볼스터나 아이필로우로 최대한 편안한 자세를 만들고, 강사가 오늘 사용할 악기와 수련 방향을 간단히 안내합니다.</p>
-          <div class="curriculum-meta">
-            <span>⏱ 약 10분</span>
-            <span>📍 이완 자세 · 안내</span>
-          </div>
+      <div class="section-label">ABOUT US</div>
+      <h2 class="section-title">수련이 일상이 되는<br>공간을 만듭니다</h2>
+      <p class="section-desc">
+        동양의 전통 수련법과 현대적 웰니스를 결합하여,
+        누구나 쉽게 접근할 수 있는 심신 수련 프로그램을 운영합니다.
+        초보자부터 숙련자까지, 각자의 속도로 깊어지는 수련을 경험하세요.
+      </p>
+      <div class="about-stats">
+        <div class="stat-item">
+          <div class="stat-num">12+</div>
+          <div class="stat-label">년 수련 경력</div>
         </div>
-      </div>
-      <div class="curriculum-item reveal">
-        <div class="curriculum-step">02</div>
-        <div class="curriculum-content">
-          <h3>사운드 배스 — 도입</h3>
-          <p>팅샤의 맑은 종소리로 수련이 시작됩니다. 부드러운 싱잉볼 음색부터 점차 다양한 악기를 더하며, 소리의 바다 속으로 천천히 안내합니다.</p>
-          <div class="curriculum-meta">
-            <span>⏱ 약 10분</span>
-            <span>📍 점진적 몰입</span>
-          </div>
+        <div class="stat-item">
+          <div class="stat-num">3,200</div>
+          <div class="stat-label">누적 수강생</div>
         </div>
-      </div>
-      <div class="curriculum-item reveal">
-        <div class="curriculum-step">03</div>
-        <div class="curriculum-content">
-          <h3>사운드 배스 — 깊은 몰입</h3>
-          <p>크리스탈볼, 공, 레인스틱 등이 겹겹이 어우러지며 소리의 풍경이 펼쳐집니다. 의식적으로 듣다가 어느새 소리 속에 녹아드는 경험을 합니다.</p>
-          <div class="curriculum-meta">
-            <span>⏱ 약 25분</span>
-            <span>📍 핵심 사운드 배스</span>
-          </div>
-        </div>
-      </div>
-      <div class="curriculum-item reveal">
-        <div class="curriculum-step">04</div>
-        <div class="curriculum-content">
-          <h3>고요 & 귀환</h3>
-          <p>모든 소리가 멈추고, 완전한 고요 속에서 잔향을 느낍니다. 이 '소리 없음의 소리'가 가장 깊은 명상의 순간입니다. 천천히 몸을 깨우며 일상으로 돌아옵니다.</p>
-          <div class="curriculum-meta">
-            <span>⏱ 약 10분</span>
-            <span>📍 고요 · 각성</span>
-          </div>
+        <div class="stat-item">
+          <div class="stat-num">98%</div>
+          <div class="stat-label">만족도</div>
         </div>
       </div>
     </div>
   </div>
 </section>
-
-<!-- FAQ -->
-<section>
-  <div class="container">
-    <div class="reveal">
-      <div class="section-label">FAQ</div>
-      <h2 class="section-title">자주 묻는 질문</h2>
+<section class="programs" id="programs">
+  <div class="programs-header reveal">
+    <div class="section-label">PROGRAMS</div>
+    <h2 class="section-title">세 가지 길,<br>하나의 균형</h2>
+    <p class="section-desc">각기 다른 접근법으로 몸과 마음의 조화를 찾아가는 핵심 프로그램</p>
+  </div>
+  <div class="programs-grid">
+    <div class="program-card reveal">
+      <div class="program-icon">🧘</div>
+      <h3>요가</h3>
+      <p>호흡과 자세의 조화를 통해 몸의 유연성과 내면의 평화를 동시에 키워갑니다. 하타, 빈야사, 음요가 등 다양한 스타일을 경험하세요.</p>
+      <div class="program-tags">
+        <a href="hatha-yoga.html" class="program-tag program-tag-link">하타요가</a>
+        <a href="vinyasa.html" class="program-tag program-tag-link">빈야사</a>
+        <span class="program-tag">음요가</span>
+      </div>
     </div>
-    <div class="faq-list">
-      <div class="faq-item reveal">
-        <button class="faq-question">사운드 배스 중에 잠들어도 괜찮나요?</button>
-        <div class="faq-answer">
-          <p>완전히 괜찮습니다. 잠드는 것은 몸이 깊은 이완을 필요로 한다는 신호입니다. 의식이 잠들어도 신체는 소리의 진동을 계속 받아들이며 회복이 이루어집니다. 깨어 있든 잠들든 효과는 충분합니다.</p>
-        </div>
+    <div class="program-card reveal">
+      <div class="program-icon">🌿</div>
+      <h3>국선도</h3>
+      <p>단전호흡과 기(氣) 수련을 바탕으로 한 한국 전통 심신 수련법입니다. 체계적인 단계별 수련으로 몸과 마음의 근본 에너지를 깨웁니다.</p>
+      <div class="program-tags">
+        <a href="danjeon.html" class="program-tag program-tag-link">단전호흡</a>
+        <a href="gi-suryeon.html" class="program-tag program-tag-link">기 수련</a>
+        <a href="doin-chejo.html" class="program-tag program-tag-link">도인체조</a>
       </div>
-      <div class="faq-item reveal">
-        <button class="faq-question">소리에 민감한데 참여해도 될까요?</button>
-        <div class="faq-answer">
-          <p>오히려 소리에 민감한 분이 더 깊은 경험을 하시는 경우가 많습니다. 다만 청각 과민증이나 이명이 심한 경우 사전에 알려주시면 악기 선택과 음량을 조절해 드립니다.</p>
-        </div>
-      </div>
-      <div class="faq-item reveal">
-        <button class="faq-question">음악적 지식이 필요한가요?</button>
-        <div class="faq-answer">
-          <p>전혀 필요 없습니다. 소리명상은 음악을 '분석'하는 것이 아니라 소리를 '느끼는' 수련입니다. 악기를 다룰 줄 몰라도, 음치여도 아무 상관없습니다. 누구나 소리를 들을 수 있으면 충분합니다.</p>
-        </div>
-      </div>
-      <div class="faq-item reveal">
-        <button class="faq-question">임산부도 참여할 수 있나요?</button>
-        <div class="faq-answer">
-          <p>임신 초기(1~3개월)에는 참여를 자제하시는 것을 권장합니다. 안정기 이후에는 참여 가능하며, 공(Gong)처럼 진동이 강한 악기 대신 크리스탈볼 위주의 부드러운 세션으로 진행합니다. 사전에 반드시 알려주세요.</p>
-        </div>
+    </div>
+    <div class="program-card reveal">
+      <div class="program-icon">🪷</div>
+      <h3>명상</h3>
+      <p>마음챙김과 집중 명상을 통해 내면의 고요함을 되찾습니다. 바쁜 일상 속에서도 실천할 수 있는 명상법을 안내합니다.</p>
+      <div class="program-tags">
+        <a href="mindfulness.html" class="program-tag program-tag-link">마음챙김</a>
+        <a href="aroma-meditation.html" class="program-tag program-tag-link">향기명상</a>
+        <a href="walking-meditation.html" class="program-tag program-tag-link">걷기명상</a>
+        <a href="sound-meditation.html" class="program-tag program-tag-link">소리명상</a>
       </div>
     </div>
   </div>
 </section>
-
-<!-- CTA -->
-<div style="padding: 0 3rem;">
-  <div class="cta-banner reveal">
-    <h2>소리명상 첫 수업,<br>무료로 체험하세요</h2>
-    <p>매주 일요일 오전 10시, 주말 힐링 명상반에서<br>사운드 배스를 경험할 수 있습니다.</p>
-    <a href="index.html#contact" class="btn-white">무료 체험 신청 →</a>
+<section id="schedule">
+  <div class="schedule">
+    <div class="schedule-header reveal">
+      <div class="section-label">SCHEDULE</div>
+      <h2 class="section-title">주간 수업 일정</h2>
+      <p class="section-desc">나에게 맞는 시간과 프로그램을 선택하세요</p>
+    </div>
+    <table class="schedule-table reveal">
+      <thead>
+        <tr><th>요일</th><th>시간</th><th>프로그램</th><th>대상</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>월 · 수</td><td>07:00 – 08:00</td><td><span class="schedule-tag tag-yoga">요가</span> 모닝 하타요가</td><td>전 레벨</td></tr>
+        <tr><td>월 · 수 · 금</td><td>10:00 – 11:30</td><td><span class="schedule-tag tag-ksd">국선도</span> 기초 단전호흡</td><td>초급</td></tr>
+        <tr><td>화 · 목</td><td>19:00 – 20:00</td><td><span class="schedule-tag tag-yoga">요가</span> 직장인 빈야사</td><td>전 레벨</td></tr>
+        <tr><td>화 · 목</td><td>20:15 – 21:00</td><td><span class="schedule-tag tag-med">명상</span> 마음챙김 명상</td><td>전 레벨</td></tr>
+        <tr><td>토</td><td>09:00 – 11:00</td><td><span class="schedule-tag tag-ksd">국선도</span> 심화 기 수련</td><td>중급 이상</td></tr>
+        <tr><td>일</td><td>10:00 – 11:30</td><td><span class="schedule-tag tag-med">명상</span> 주말 힐링 명상</td><td>전 레벨</td></tr>
+      </tbody>
+    </table>
   </div>
-</div>
-
+</section>
+<section class="testimonials" id="reviews">
+  <div class="testimonials-header reveal">
+    <div class="section-label">REVIEWS</div>
+    <h2 class="section-title">수련생 이야기</h2>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial-card reveal">
+      <div class="testimonial-quote">"</div>
+      <p>요가를 시작한 지 6개월, 만성 어깨 통증이 거의 사라졌어요. 몸이 가벼워지니 마음도 함께 편해지더라고요.</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar" style="background:var(--warm);">김</div>
+        <div><div class="testimonial-name">김지현</div><div class="testimonial-role">요가 수강 6개월</div></div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal">
+      <div class="testimonial-quote">"</div>
+      <p>국선도 단전호흡을 배우고 나서 집중력과 체력이 눈에 띄게 좋아졌습니다. 한국 전통 수련의 깊이를 느낍니다.</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar" style="background:var(--sage);">박</div>
+        <div><div class="testimonial-name">박성훈</div><div class="testimonial-role">국선도 수련 1년</div></div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal">
+      <div class="testimonial-quote">"</div>
+      <p>매일 15분 명상을 시작한 뒤로 수면의 질이 확 달라졌어요. 불안감이 줄고 하루를 더 차분하게 보내게 됩니다.</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar" style="background:var(--rust);">이</div>
+        <div><div class="testimonial-name">이수연</div><div class="testimonial-role">명상 수강 3개월</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="cta-banner" id="contact">
+  <div class="reveal" style="position:relative;z-index:1;">
+    <div class="section-label">GET STARTED</div>
+    <h2 class="section-title">첫 수업은 무료입니다</h2>
+    <p>부담 없이 경험해 보세요. 나에게 맞는 수련을 함께 찾아드립니다.</p>
+    <a href="mailto:sung7uk@naver.com" class="btn-primary" style="font-size:1rem;">무료 체험 신청하기</a>
+  </div>
+</section>
 <footer>
-  <a href="index.html" class="footer-logo">트래블러 명상<span>.</span></a>
-  <div class="footer-copy">© 2026 트래블러 명상. All rights reserved.</div>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">트래블러 명상<span>.</span></div>
+      <p class="footer-desc">요가, 국선도, 명상을 통해 몸과 마음의 균형을 찾아가는 통합 심신 수련 공간입니다.</p>
+    </div>
+    <div class="footer-col">
+      <h4>프로그램</h4>
+      <ul>
+        <li><a href="#programs">요가</a></li>
+        <li><a href="#programs">국선도</a></li>
+        <li><a href="#programs">명상</a></li>
+        <li><a href="#schedule">일정표</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>안내</h4>
+      <ul>
+        <li><a href="#about">소개</a></li>
+        <li><a href="#reviews">수련 후기</a></li>
+        <li><a href="#">오시는 길</a></li>
+        <li><a href="#">FAQ</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>연락처</h4>
+      <ul>
+        <li><a href="mailto:sung7uk@naver.com">sung7uk@naver.com</a></li>
+        <li><a href="tel:010-5223-5888">010-5223-5888</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="http://blog.naver.com/sung7uk" target="_blank" rel="noopener">Blog</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 트래블러 명상. All rights reserved.</div>
 </footer>
-
 <script>
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); });
-
+const toggle = document.getElementById('navToggle');
+toggle.addEventListener('click', () => nav.classList.toggle('open'));
+document.querySelectorAll('.nav-links a').forEach(a => { a.addEventListener('click', () => nav.classList.remove('open')); });
 const reveals = document.querySelectorAll('.reveal');
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry, i) => {
-    if (entry.isIntersecting) {
-      setTimeout(() => entry.target.classList.add('visible'), i * 80);
-      observer.unobserve(entry.target);
-    }
+    if (entry.isIntersecting) { setTimeout(() => entry.target.classList.add('visible'), i * 100); observer.unobserve(entry.target); }
   });
-}, { threshold: 0.12 });
+}, { threshold: 0.15 });
 reveals.forEach(el => observer.observe(el));
-
-document.querySelectorAll('.faq-question').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const item = btn.parentElement;
-    const wasOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-    if (!wasOpen) item.classList.add('open');
-  });
-});
 </script>
-
 </body>
 </html>
