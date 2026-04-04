@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>향기명상 — 트래블러 명상</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;500;700;900&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1612;
+  --paper: #f5f0e8;
+  --warm: #c9a96e;
+  --sage: #7a8b6f;
+  --rust: #b5654a;
+  --rust-deep: #8b4a35;
+  --mist: #d4cfc5;
+  --cloud: #ebe6dc;
+  --deep: #2c2520;
+  --rust-glow: rgba(181, 101, 74, 0.12);
+  --lavender: #9b8ec4;
+  --lavender-glow: rgba(155, 142, 196, 0.12);
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--paper); color: var(--ink);
+  overflow-x: hidden; line-height: 1.7;
+}
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.2rem 3rem;
+  background: rgba(245, 240, 232, 0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--mist);
+}
+.nav.scrolled { padding: 0.8rem 3rem; box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
+.nav-logo {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 900; font-size: 1.5rem;
+  letter-spacing: -0.02em; color: var(--ink); text-decoration: none;
+}
+.nav-logo span { color: var(--warm); }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  text-decoration: none; color: var(--ink);
+  font-weight: 400; font-size: 0.92rem;
+  position: relative; transition: color 0.3s;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; left: 0;
+  width: 0; height: 2px; background: var(--warm); transition: width 0.3s;
+}
+.nav-links a:hover { color: var(--warm); }
+.nav-links a:hover::after { width: 100%; }
+.nav-cta {
+  padding: 0.55rem 1.6rem; border: 1.5px solid var(--ink);
+  border-radius: 100px; text-decoration: none; color: var(--ink);
+  font-size: 0.88rem; font-weight: 500; transition: all 0.3s;
+}
+.nav-cta:hover { background: var(--ink); color: var(--paper); }
+
+.page-hero {
+  padding: 10rem 3rem 5rem;
+  background: linear-gradient(160deg, var(--paper) 0%, #ede5de 50%, #e6ddd4 100%);
+  position: relative; overflow: hidden;
+}
+.page-hero::before {
+  content: ''; position: absolute; top: -100px; right: -80px;
+  width: 500px; height: 500px; border-radius: 50%;
+  background: var(--lavender); opacity: 0.06;
+}
+.page-hero::after {
+  content: ''; position: absolute; bottom: -120px; left: -80px;
+  width: 380px; height: 380px; border-radius: 50%;
+  background: var(--rust); opacity: 0.05;
+}
+.breadcrumb {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-size: 0.85rem; color: #999; margin-bottom: 2rem;
+}
+.breadcrumb a { color: var(--rust); text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.page-hero h1 {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 900; font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 1.2rem;
+}
+.page-hero h1 em {
+  font-style: normal;
+  background: linear-gradient(135deg, var(--rust), var(--lavender));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.page-hero-desc {
+  font-size: 1.1rem; color: #6b6157; max-width: 600px;
+  font-weight: 300; line-height: 1.9;
+}
+
+section { padding: 5rem 3rem; }
+.container { max-width: 1100px; margin: 0 auto; }
+.section-label {
+  display: inline-block; font-size: 0.78rem;
+  font-weight: 500; letter-spacing: 0.2em;
+  color: var(--rust); margin-bottom: 1rem;
+}
+.section-title {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 700; font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  line-height: 1.3; margin-bottom: 1.2rem;
+}
+
+.intro-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 4rem; align-items: center;
+}
+.intro-text p {
+  font-size: 1rem; color: #6b6157; line-height: 2;
+  margin-bottom: 1.2rem; font-weight: 300;
+}
+.intro-visual {
+  background: linear-gradient(135deg, #e0d5cc, #c4a8b0);
+  border-radius: 24px; height: 400px;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.intro-visual-icon {
+  font-size: 8rem; opacity: 0.15;
+  font-family: 'Noto Serif KR', serif; color: white;
+}
+.intro-visual-label {
+  position: absolute; bottom: 2rem; left: 2rem;
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.15rem; font-weight: 700; color: white; opacity: 0.5;
+}
+
+/* ── OILS ── */
+.oils-section { background: var(--deep); color: var(--paper); }
+.oils-section .section-label { color: var(--lavender); }
+.oils-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem; margin-top: 3rem;
+}
+.oil-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px; padding: 2rem 1.5rem;
+  text-align: center; transition: all 0.4s;
+}
+.oil-card:hover { background: rgba(255,255,255,0.08); transform: translateY(-4px); }
+.oil-emoji { font-size: 2.5rem; margin-bottom: 0.8rem; }
+.oil-card h3 {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.05rem; font-weight: 700; margin-bottom: 0.3rem;
+}
+.oil-card .eng { font-size: 0.78rem; color: var(--lavender); margin-bottom: 0.6rem; }
+.oil-card p { font-size: 0.85rem; color: #a89f94; line-height: 1.7; }
+
+/* ── HOW IT WORKS ── */
+.mechanism-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 2rem; margin-top: 2.5rem;
+}
+.mech-card {
+  background: white; border-radius: 20px;
+  padding: 2.5rem 2rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.04); transition: all 0.4s;
+  text-align: center;
+}
+.mech-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
+.mech-num {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 2.5rem; font-weight: 900;
+  color: var(--lavender); opacity: 0.3;
+  margin-bottom: 0.8rem; line-height: 1;
+}
+.mech-card h3 {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.1rem; font-weight: 700; margin-bottom: 0.6rem;
+}
+.mech-card p { font-size: 0.92rem; color: #7a7168; line-height: 1.8; }
+
+/* ── BENEFITS ── */
+.benefits-section { background: var(--cloud); }
+.benefits-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+  margin-top: 2.5rem;
+}
+.benefit-card {
+  background: white; border-radius: 20px;
+  padding: 2.5rem 2rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.04); transition: all 0.4s;
+}
+.benefit-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
+.benefit-icon {
+  width: 56px; height: 56px; border-radius: 16px;
+  background: var(--rust-glow);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.6rem; margin-bottom: 1.2rem;
+}
+.benefit-card h3 {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.1rem; font-weight: 700; margin-bottom: 0.6rem;
+}
+.benefit-card p { font-size: 0.92rem; color: #7a7168; line-height: 1.8; }
+
+/* ── CURRICULUM ── */
+.curriculum-list { max-width: 800px; }
+.curriculum-item {
+  display: flex; gap: 2rem; align-items: flex-start;
+  padding: 2rem 0; border-bottom: 1px solid var(--cloud);
+}
+.curriculum-item:last-child { border-bottom: none; }
+.curriculum-step {
+  flex-shrink: 0; width: 56px; height: 56px;
+  border-radius: 16px; background: var(--rust-glow);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.2rem; font-weight: 700; color: var(--rust);
+}
+.curriculum-content h3 {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem;
+}
+.curriculum-content p { font-size: 0.95rem; color: #7a7168; line-height: 1.8; }
+.curriculum-meta {
+  display: flex; gap: 1.5rem; margin-top: 0.6rem;
+  font-size: 0.82rem; color: #aaa;
+}
+
+/* ── FAQ ── */
+.faq-list { max-width: 750px; }
+.faq-item { border-bottom: 1px solid var(--cloud); padding: 1.5rem 0; }
+.faq-question {
+  display: flex; justify-content: space-between; align-items: center;
+  cursor: pointer; font-weight: 500; font-size: 1rem;
+  background: none; border: none; width: 100%;
+  text-align: left; color: var(--ink); font-family: inherit; padding: 0;
+}
+.faq-question::after {
+  content: '+'; font-size: 1.4rem; color: var(--rust);
+  transition: transform 0.3s; flex-shrink: 0; margin-left: 1rem;
+}
+.faq-item.open .faq-question::after { transform: rotate(45deg); }
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s; }
+.faq-item.open .faq-answer { max-height: 300px; padding-top: 1rem; }
+.faq-answer p { font-size: 0.95rem; color: #7a7168; line-height: 1.9; font-weight: 300; }
+
+.cta-banner {
+  background: linear-gradient(135deg, var(--rust), var(--rust-deep));
+  color: white; text-align: center;
+  padding: 5rem 3rem; border-radius: 24px;
+  max-width: 1100px; margin: 0 auto 5rem;
+  position: relative; overflow: hidden;
+}
+.cta-banner::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(circle at 30% 50%, rgba(155,142,196,0.15), transparent 60%);
+}
+.cta-banner h2 {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 2rem; font-weight: 700; margin-bottom: 1rem; position: relative;
+}
+.cta-banner p { font-size: 1rem; opacity: 0.85; margin-bottom: 2rem; position: relative; }
+.btn-white {
+  display: inline-block; padding: 0.9rem 2.4rem;
+  background: white; color: var(--ink);
+  border-radius: 100px; font-size: 0.95rem;
+  font-weight: 500; text-decoration: none;
+  transition: all 0.3s; position: relative;
+}
+.btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+
+footer {
+  padding: 3rem 3rem 2rem; border-top: 1px solid var(--mist);
+  display: flex; justify-content: space-between; align-items: center;
+  max-width: 1100px; margin: 0 auto;
+}
+.footer-logo {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 900; font-size: 1.2rem; text-decoration: none; color: var(--ink);
+}
+.footer-logo span { color: var(--warm); }
+.footer-copy { font-size: 0.82rem; color: #aaa; }
+
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s, transform 0.8s; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 900px) {
+  .nav-links, .nav-cta { display: none; }
+  .intro-grid { grid-template-columns: 1fr; }
+  .oils-grid { grid-template-columns: repeat(2, 1fr); }
+  .mechanism-grid { grid-template-columns: 1fr; }
+  .benefits-grid { grid-template-columns: 1fr; }
+  section { padding: 4rem 1.5rem; }
+  .page-hero { padding: 8rem 1.5rem 4rem; }
+  .nav { padding: 1rem 1.5rem; }
+  footer { flex-direction: column; gap: 1rem; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-logo">트래블러 명상<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">소개</a></li>
+    <li><a href="index.html#programs">프로그램</a></li>
+    <li><a href="index.html#schedule">일정</a></li>
+    <li><a href="index.html#reviews">후기</a></li>
+    <li><a href="index.html#contact">문의</a></li>
+  </ul>
+  <a href="index.html#contact" class="nav-cta">체험 신청</a>
+</nav>
+
+<section class="page-hero">
+  <div class="breadcrumb">
+    <a href="index.html">홈</a>
+    <span>›</span>
+    <a href="index.html#programs">프로그램</a>
+    <span>›</span>
+    <span>향기명상</span>
+  </div>
+  <h1><em>향기명상</em><br>Aroma Meditation</h1>
+  <p class="page-hero-desc">
+    천연 에센셜 오일의 향기를 매개로 깊은 내면의 고요에 이르는 명상.
+    후각은 뇌의 감정 중추에 가장 빠르게 도달하는 감각입니다.
+    향기와 호흡이 만나 마음의 문을 부드럽게 엽니다.
+  </p>
+</section>
+
+<!-- INTRO -->
+<section>
+  <div class="container">
+    <div class="intro-grid reveal">
+      <div class="intro-text">
+        <div class="section-label">WHAT IS AROMA MEDITATION</div>
+        <h2 class="section-title">향기명상이란<br>무엇인가요?</h2>
+        <p>
+          향기명상은 아로마테라피(Aromatherapy)와 마음챙김 명상을 결합한 수련법입니다.
+          천연 식물에서 추출한 에센셜 오일의 향을 호흡과 함께 들이쉬며,
+          후각을 통해 현재 순간에 깊이 몰입하는 것이 핵심입니다.
+        </p>
+        <p>
+          후각은 다른 감각과 달리 대뇌 피질을 거치지 않고
+          변연계(감정·기억 중추)에 직접 연결됩니다.
+          이 때문에 특정 향기는 순식간에 마음을 안정시키거나,
+          잊고 있던 평화로운 기억을 불러일으킬 수 있습니다.
+        </p>
+        <p>
+          명상이 어려운 초보자도 향기라는 뚜렷한 앵커(닻) 덕분에
+          집중이 쉬워지며, 심리적 안정감을 빠르게 느낄 수 있습니다.
+          고대 이집트, 인도, 동아시아에서 제의와 수행에
+          향을 사용했던 전통의 현대적 계승이기도 합니다.
+        </p>
+      </div>
+      <div class="intro-visual">
+        <div class="intro-visual-icon">香</div>
+        <div class="intro-visual-label">Scent as a Gateway</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ESSENTIAL OILS -->
+<section class="oils-section">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">ESSENTIAL OILS</div>
+      <h2 class="section-title" style="color:var(--paper);">수업에서 사용하는 오일</h2>
+    </div>
+    <div class="oils-grid">
+      <div class="oil-card reveal">
+        <div class="oil-emoji">💜</div>
+        <h3>라벤더</h3>
+        <div class="eng">Lavender</div>
+        <p>긴장 이완과 수면 유도. 가장 대표적인 진정 오일입니다.</p>
+      </div>
+      <div class="oil-card reveal">
+        <div class="oil-emoji">🌿</div>
+        <h3>유칼립투스</h3>
+        <div class="eng">Eucalyptus</div>
+        <p>호흡기를 열어주고 정신을 맑게. 깊은 호흡 수련에 적합합니다.</p>
+      </div>
+      <div class="oil-card reveal">
+        <div class="oil-emoji">🍊</div>
+        <h3>스위트 오렌지</h3>
+        <div class="eng">Sweet Orange</div>
+        <p>밝고 따뜻한 에너지. 우울감 해소와 기분 전환에 효과적입니다.</p>
+      </div>
+      <div class="oil-card reveal">
+        <div class="oil-emoji">🪵</div>
+        <h3>샌달우드</h3>
+        <div class="eng">Sandalwood</div>
+        <p>깊고 따뜻한 우디 향. 고대부터 명상과 수행에 사용된 전통 오일입니다.</p>
+      </div>
+      <div class="oil-card reveal">
+        <div class="oil-emoji">🌹</div>
+        <h3>로즈</h3>
+        <div class="eng">Rose</div>
+        <p>마음의 문을 여는 오일. 자기 수용과 감정 치유를 돕습니다.</p>
+      </div>
+      <div class="oil-card reveal">
+        <div class="oil-emoji">🍃</div>
+        <h3>페퍼민트</h3>
+        <div class="eng">Peppermint</div>
+        <p>시원하고 상쾌한 각성 효과. 졸음 방지와 집중력 향상에 활용합니다.</p>
+      </div>
+      <div class="oil-card reveal">
+        <div class="oil-emoji">⛪</div>
+        <h3>프랑킨센스</h3>
+        <div class="eng">Frankincense</div>
+        <p>신성한 향. 호흡을 깊게 하고 명상의 깊이를 더해주는 오일입니다.</p>
+      </div>
+      <div class="oil-card reveal">
+        <div class="oil-emoji">🫒</div>
+        <h3>일랑일랑</h3>
+        <div class="eng">Ylang Ylang</div>
+        <p>달콤하고 이국적인 꽃향기. 심박수를 낮추고 긴장을 풀어줍니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section>
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">HOW IT WORKS</div>
+      <h2 class="section-title">향기는 어떻게 마음에 닿는가</h2>
+    </div>
+    <div class="mechanism-grid">
+      <div class="mech-card reveal">
+        <div class="mech-num">01</div>
+        <h3>후각 수용체</h3>
+        <p>코 안의 약 400종의 후각 수용체가 향기 분자를 감지하여 전기 신호로 변환합니다. 이 과정은 밀리초 단위로 일어납니다.</p>
+      </div>
+      <div class="mech-card reveal">
+        <div class="mech-num">02</div>
+        <h3>변연계 직통</h3>
+        <p>후각 신호는 시상을 거치지 않고 편도체와 해마에 직접 도달합니다. 이 때문에 향기는 감정과 기억에 즉각적으로 영향을 미칩니다.</p>
+      </div>
+      <div class="mech-card reveal">
+        <div class="mech-num">03</div>
+        <p>자율신경 조절</p>
+        <h3>신경 전달 물질</h3>
+        <p>라벤더의 리날룰 성분은 세로토닌 분비를 촉진하고, 시트러스 계열은 도파민 활성을 도와 기분을 조절합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="benefits-section">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">BENEFITS</div>
+      <h2 class="section-title">향기명상의 효과</h2>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-card reveal">
+        <div class="benefit-icon">🧘</div>
+        <h3>명상 접근성 향상</h3>
+        <p>향기라는 명확한 주의 대상이 있어 명상 초보자도 쉽게 집중할 수 있습니다. '마음을 비우라'는 막연한 지시 없이 시작할 수 있습니다.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-icon">😌</div>
+        <h3>빠른 이완 효과</h3>
+        <p>후각의 변연계 직통 경로 덕분에 향기를 맡는 즉시 심리적 안정감을 느낄 수 있습니다. 좌식 명상보다 이완에 이르는 시간이 짧습니다.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-icon">💤</div>
+        <h3>수면의 질 개선</h3>
+        <p>취침 전 라벤더나 샌달우드 향기명상을 실시하면 입면 시간이 단축되고 수면 중 각성 횟수가 줄어든다는 연구가 있습니다.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-icon">💆</div>
+        <h3>스트레스 호르몬 감소</h3>
+        <p>아로마 흡입 후 코르티솔 수치가 유의미하게 감소한다는 임상 연구 결과가 다수 보고되어 있습니다.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-icon">❤️</div>
+        <h3>감정 해소</h3>
+        <p>특정 향기가 억눌린 감정이나 기억을 부드럽게 표면으로 끌어올려, 안전한 공간에서 감정을 해소하고 치유하는 계기가 됩니다.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-icon">🫁</div>
+        <h3>호흡 심화</h3>
+        <p>좋은 향기를 더 깊이 맡고 싶은 자연스러운 욕구가 복식호흡을 유도하여, 별도의 호흡 훈련 없이도 호흡이 깊어집니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CURRICULUM -->
+<section>
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">CLASS STRUCTURE</div>
+      <h2 class="section-title">수업 구성</h2>
+    </div>
+    <div class="curriculum-list">
+      <div class="curriculum-item reveal">
+        <div class="curriculum-step">01</div>
+        <div class="curriculum-content">
+          <h3>오일 선택 & 인텐션</h3>
+          <p>오늘의 테마에 맞는 에센셜 오일 2~3종을 소개합니다. 각 향기를 가볍게 맡아보고 자신에게 끌리는 향을 선택한 뒤, 수련의 의도(인텐션)를 설정합니다.</p>
+          <div class="curriculum-meta">
+            <span>⏱ 약 10분</span>
+            <span>📍 향기 탐색 · 의도 설정</span>
+          </div>
+        </div>
+      </div>
+      <div class="curriculum-item reveal">
+        <div class="curriculum-step">02</div>
+        <div class="curriculum-content">
+          <h3>향기 호흡 명상</h3>
+          <p>손목이나 손바닥에 오일을 묻히고, 코 가까이 가져가 천천히 들이쉽니다. 향기가 코를 통해 들어와 몸 전체로 퍼지는 것을 상상하며 호흡과 향기를 하나로 느낍니다.</p>
+          <div class="curriculum-meta">
+            <span>⏱ 약 15분</span>
+            <span>📍 후각 집중 · 호흡 연결</span>
+          </div>
+        </div>
+      </div>
+      <div class="curriculum-item reveal">
+        <div class="curriculum-step">03</div>
+        <div class="curriculum-content">
+          <h3>디퓨저 공간 명상</h3>
+          <p>디퓨저로 공간 전체에 향기를 채운 뒤 바디스캔 또는 마음챙김 명상을 진행합니다. 향기가 배경으로 깔리며 자연스럽게 이완이 깊어집니다.</p>
+          <div class="curriculum-meta">
+            <span>⏱ 약 15분</span>
+            <span>📍 공간 향기 · 깊은 이완</span>
+          </div>
+        </div>
+      </div>
+      <div class="curriculum-item reveal">
+        <div class="curriculum-step">04</div>
+        <div class="curriculum-content">
+          <h3>저널링 & 나눔</h3>
+          <p>수련 중 떠오른 감각, 감정, 이미지를 간단히 기록합니다. 향기가 불러일으킨 내면의 경험을 자유롭게 나누며 수업을 마무리합니다.</p>
+          <div class="curriculum-meta">
+            <span>⏱ 약 10분</span>
+            <span>📍 기록 · 공유</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section style="background: var(--cloud);">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">자주 묻는 질문</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <button class="faq-question">향기에 예민한 편인데 괜찮을까요?</button>
+        <div class="faq-answer">
+          <p>수업에서는 100% 천연 에센셜 오일만 사용하며, 농도를 희석하여 은은하게 활용합니다. 사전에 알레르기나 과민 반응 여부를 확인하고, 본인에게 편안한 향만 선택하여 수련하므로 안심하셔도 됩니다.</p>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-question">에센셜 오일을 직접 준비해야 하나요?</button>
+        <div class="faq-answer">
+          <p>수업에 필요한 모든 에센셜 오일은 준비되어 있습니다. 수련 후 마음에 드는 향이 있으면 개인 구매를 안내해 드리지만, 필수는 아닙니다. 빈손으로 오셔도 됩니다.</p>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-question">임산부도 참여할 수 있나요?</button>
+        <div class="faq-answer">
+          <p>일부 에센셜 오일은 임산부에게 사용을 피하는 것이 좋습니다(로즈마리, 클라리세이지 등). 수업 전 임신 사실을 알려주시면 안전한 오일만 사용하도록 조정해 드립니다. 의사와 상담 후 참여하시는 것을 권장합니다.</p>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-question">집에서도 향기명상을 할 수 있나요?</button>
+        <div class="faq-answer">
+          <p>물론입니다. 마음에 드는 에센셜 오일 1~2종과 간단한 디퓨저만 있으면 됩니다. 수업에서 익힌 호흡법을 활용하여 취침 전 10분만 실시해도 효과를 느낄 수 있으며, 홈 프랙티스 가이드도 제공해 드립니다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div style="padding: 0 3rem;">
+  <div class="cta-banner reveal">
+    <h2>향기명상 첫 수업,<br>무료로 체험하세요</h2>
+    <p>매주 일요일 오전 10시, 주말 힐링 명상반에서<br>향기명상을 함께 경험합니다.</p>
+    <a href="index.html#contact" class="btn-white">무료 체험 신청 →</a>
+  </div>
+</div>
+
+<footer>
+  <a href="index.html" class="footer-logo">트래블러 명상<span>.</span></a>
+  <div class="footer-copy">© 2026 트래블러 명상. All rights reserved.</div>
+</footer>
+
+<script>
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); });
+
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+reveals.forEach(el => observer.observe(el));
+
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  });
+});
+</script>
+
+</body>
+</html>
