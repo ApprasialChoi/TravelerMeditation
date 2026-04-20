@@ -57,6 +57,32 @@ body {
 }
 .nav-links a:hover { color: var(--warm); }
 .nav-links a:hover::after { width: 100%; }
+.nav-links > li { position: relative; }
+.nav-dropdown {
+  display: none; position: absolute; top: calc(100% + 12px); left: -1rem;
+  background: rgba(245, 240, 232, 0.97);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--mist);
+  border-radius: 12px; padding: 0.6rem 0;
+  min-width: 160px; box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+  list-style: none; z-index: 200;
+}
+.nav-links > li:hover .nav-dropdown { display: block; }
+.dropdown-header {
+  padding: 0.5rem 1.2rem 0.3rem;
+  font-size: 0.72rem; font-weight: 500;
+  letter-spacing: 0.15em; color: var(--warm);
+  text-transform: uppercase;
+}
+.nav-dropdown li a {
+  display: block; padding: 0.5rem 1.2rem;
+  font-size: 0.88rem; color: var(--ink);
+  transition: background 0.2s;
+}
+.nav-dropdown li a::after { display: none; }
+.nav-dropdown li a:hover {
+  background: var(--cloud); color: var(--warm);
+}
 .nav-cta {
   padding: 0.55rem 1.6rem; border: 1.5px solid var(--ink);
   border-radius: 100px; text-decoration: none; color: var(--ink);
@@ -461,8 +487,8 @@ footer { padding: 4rem 3rem 2rem; border-top: 1px solid var(--mist); }
       <tbody>
         <tr><td>월 · 수</td><td>07:00 – 08:00</td><td><span class="schedule-tag tag-yoga">요가</span> 모닝 하타요가</td><td>전 레벨</td></tr>
         <tr><td>월 · 수 · 금</td><td>10:00 – 11:30</td><td><span class="schedule-tag tag-ksd">국선도</span> 기초 단전호흡</td><td>초급</td></tr>
-        <tr><td>화 · 목</td><td>19:00 – 20:00</td><td><span class="schedule-tag tag-yoga">요가</span> 직장인 빈야사</td><td>전 레벨</td></tr>
-        <tr><td>화 · 목</td><td>20:15 – 21:00</td><td><span class="schedule-tag tag-med">명상</span> 마음챙김 명상</td><td>전 레벨</td></tr>
+        <tr><td>화 · 목</td><td>19:00 – 20:30</td><td><span class="schedule-tag tag-yoga">요가</span> 직장인 빈야사</td><td>전 레벨</td></tr>
+        <tr><td>화 · 목</td><td>17:30 – 19:00</td><td><span class="schedule-tag tag-med">명상</span> 마음챙김명상(향기, 걷기, 소리명상)</td><td>전 레벨</td></tr>
         <tr><td>토</td><td>11:00 – 12:30</td><td><span class="schedule-tag tag-med">명상</span> 마음챙김명상 및 티벳오식요가</td><td>중급 이상</td></tr>
         <tr><td>일</td><td></td><td><span class="schedule-tag tag-med">명상</span> 명상여행(연간 2회)</td><td>전 레벨</td></tr>
       </tbody>
@@ -529,7 +555,7 @@ footer { padding: 4rem 3rem 2rem; border-top: 1px solid var(--mist); }
       <ul>
         <li><a href="#about">소개</a></li>
         <li><a href="#reviews">수련 후기</a></li>
-        <li><a href="#">오시는 길</a></li>
+        <li><a href="directions.html">오시는 길</a></li>
         <li><a href="#">FAQ</a></li>
       </ul>
     </div>
